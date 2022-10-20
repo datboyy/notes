@@ -1,0 +1,82 @@
+$content_font: 'Roboto'
+$text_accent: #ff0255
+$text_accent_secondary: #ff022c
+
+$text_secondary: #999
+$text_secondary_light: #ccc
+
+$primary_links_color: blue
+
+body
+  background-color: #000116
+  .smlr
+    font-size: 12.5px
+    line-height: 1.3em
+    color: #999
+  .medium
+    font-weight: 700
+  .container
+    width: 500px
+    margin: auto
+    margin-top: 30px
+    background-color: #000
+    color: #fff
+    padding: 20px 40px 20px 40px
+  .container h2
+     width: 100%
+     margin-bottom: 20px
+     font-family: 'Roboto'
+     color: #fff
+     font-size: 35px
+  .container h2 + p:not(.logout-message)
+    margin-bottom: 30px
+    font-size: 12px
+    font-family: $content_font
+    color: $text_secondary
+  p
+    font-family: $content_font
+  a
+    color: $primary_links_color
+  form
+    label
+      display: block
+      margin-bottom: 10px
+      margin-top: 10px
+      font-family: $content_font
+      font-size: 15px
+      color: $text_secondary_light
+    input[type="text"], input[type="password"], input[type="email"]
+      width: 100%
+      margin-top: 5px
+      margin-bottom: 15px
+      width: 450px
+      height: 10px
+      padding: 20px
+      font-family: $content_font
+      font-size: 18px
+    input[type="submit"]
+      width: 100%
+      background-color: $text_accent
+      border: 0
+      color: #fff
+      padding: 20px
+      margin-top: 20px
+      font-weight: 600
+      font-family: $content_font
+      font-size: 14px
+      &:hover
+        background-color: $text_accent_secondary
+        cursor: pointer
+
+  .logout-message
+     font-size: 15px
+     color: $text_secondary
+     margin-bottom: 0
+
+  .create_account
+    width: 100%
+    margin-top: 40px
+    text-align: right
+    a
+      text-decoration: none
+      font-size: 12px
