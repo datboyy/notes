@@ -16,7 +16,7 @@ if((new User($dbh))->isLoggedIn())
 // Register controller process
 elseif(isset($_GET['register']))
 {
-  if(!REGISTRATION_ENABLED)
+  if(REGISTRATION_ENABLED)
   {
     if(isset($_POST['email'], $_POST['username'], $_POST['password'], $_POST['password_confirmation']))
     {
