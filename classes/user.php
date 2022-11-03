@@ -63,7 +63,7 @@ class User
     if(!empty($this->username))
     {
       $r = $this->dbh->prepare('SELECT COUNT(id) AS nbr FROM ' . $this->users_table . ' WHERE username = :username');
-      $r->bindValue(':username', $this->username, PDO::PARAM_INT);
+      $r->bindValue(':username', $this->username, PDO::PARAM_STR);
       $d = $r->execute();
       $res = $r->fetch(PDO::FETCH_ASSOC);
       if($res['nbr'])
