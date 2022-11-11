@@ -1,11 +1,4 @@
-$content_font: 'Roboto'
-$text_accent: #ff0255
-$text_accent_secondary: #ff022c
-
-$text_secondary: #999
-$text_secondary_light: #ccc
-
-$primary_links_color: blue
+$container_spacing: 5px 20px 5px 20px
 
 body
   background-color: #000116
@@ -13,73 +6,111 @@ body
     font-size: 12.5px
     line-height: 1.3em
     color: #999
-  .medium
-    font-weight: 700
-  .container
-    width: 500px
+  .head-links
+    padding: 20px 0 0
+    width: 70ch
     margin: auto
-    margin-top: 30px
-    background-color: #000
-    color: #fff
-    padding: 20px 40px 20px 40px
-  .container h2
-     width: 100%
-     margin-bottom: 20px
-     font-family: 'Roboto'
-     color: #fff
-     font-size: 35px
-  .container h2 + p:not(.logout-message)
-    margin-bottom: 30px
-    font-size: 12px
-    font-family: $content_font
-    color: $text_secondary
-  p
-    font-family: $content_font
-  a
-    color: $primary_links_color
-  form
-    label
-      display: block
-      margin-bottom: 10px
-      margin-top: 10px
-      font-family: $content_font
-      font-size: 15px
-      color: $text_secondary_light
-    input[type="text"], input[type="password"], input[type="email"]
-      width: 100%
-      margin-top: 5px
-      margin-bottom: 15px
-      width: 450px
-      height: 10px
-      padding: 20px
-      font-family: $content_font
-      font-size: 18px
-    input[type="submit"]
-      width: 100%
-      background-color: $text_accent
-      border: 0
-      color: #fff
-      padding: 20px
-      margin-top: 20px
-      font-weight: 600
-      font-family: $content_font
-      font-size: 14px
-      &:hover
-        background-color: $text_accent_secondary
-        cursor: pointer
-
-    input[type="submit"]:disabled
-      background-color: $text-secondary
-
-  .logout-message
-     font-size: 15px
-     color: $text_secondary
-     margin-bottom: 0
-
-  .create_account
-    width: 100%
-    margin-top: 40px
+    display: block
+    font-family: 'Roboto'
     text-align: right
     a
       text-decoration: none
-      font-size: 12px
+  .sidebar
+    margin: 150px 0px 0px 30px
+    width: 300px
+    height: 500px
+    position: absolute
+    left: 10px
+  .tags-cloud
+    background-color: #000
+    padding: 20px
+    h2
+     width: 100%
+     margin-bottom: 40px
+     font-family: 'Roboto'
+     color: #fff
+     font-size: 14px
+    .tags
+      display: flex
+      flex-wrap: wrap
+      .tag
+        margin-bottom: 15px
+        align-self: flex-end
+        margin-left: 5px
+        padding: 5px
+        font-family: 'Roboto'
+        background-color: #111
+        font-size: 14px
+        a
+          text-decoration: none
+          color: #999
+  .container
+    width: 80ch
+    padding-top: 1px
+    margin: 30px auto 15px auto
+    background-color: #000
+    color: #fff
+    h1
+      padding: $container_spacing
+      padding-bottom: 0
+      font-family: 'Roboto'
+      font-weight: bold
+      font-size: 40px
+    .text-container
+      font-family: 'Roboto'
+      line-height: 1.5em
+      padding: $container_spacing
+      padding-top: 0
+    .notes-list
+      list-style-type: none
+      margin: 0
+      margin-top: 40px
+      margin-bottom: 40px
+      padding: 0
+      li
+        display: flex
+        align-items: center
+        width: 95%
+        font-size: 0.85em
+        padding: 10px
+        border-top: 1px solid #eee
+        &:last-of-type
+          border-bottom: 1px solid #eee
+        a
+          flex: 1
+          text-decoration: none
+          color: #ff0255
+        .tag
+          align-self: flex-end
+          margin-left: 5px
+          padding: 5px
+          background-color: #111
+          font-size: 12px
+          a
+            text-decoration: none
+            color: #999
+            
+  .profile_container
+    display: flex
+    align-items: center
+    width: 79ch
+    font-family: 'Roboto'
+    line-height: 1.5em
+    padding: $container_spacing
+    padding-top: 0
+    margin: 0 auto 30px auto
+    background-color: #000
+    color: #555
+    font-size: 13.5px
+    img
+      width: 100px
+      border-radius: 100px
+      margin: 20px 30px 15px 5px
+
+  .btm-note
+    width: 80ch
+    margin: auto
+    color: white
+    font-size: 12px
+    font-family: 'Roboto'
+    color: #555
