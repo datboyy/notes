@@ -1,5 +1,6 @@
 <?php
 require 'classes/user.php';
+require 'classes/note.php';
 
 session_start();
 
@@ -16,4 +17,6 @@ catch(PDOException $e)
 {
   echo $e->getMessage();
 }
+
+$UserObj = new User($dbh);
 // EOF

@@ -1,9 +1,26 @@
 <?php
 class Note
 {
+/* +---------+--------------+------+-----+---------+----------------+
+   | Field   | Type         | Null | Key | Default | Extra          |
+   +---------+--------------+------+-----+---------+----------------+
+   | id      | int(11)      | NO   | PRI | NULL    | auto_increment |
+   | title   | varchar(255) | NO   |     | NULL    |                |
+   | user_id | int(11)      | NO   |     | NULL    |                |
+   | resume  | text         | NO   |     | NULL    |                |
+   | content | text         | NO   |     | NULL    |                |
+   | time    | int(11)      | NO   |     | NULL    |                |
+   +---------+--------------+------+-----+---------+----------------+*/
 
+  protected $dbh;
+  protected $table = 'notes';
+
+  protected $setterAllowedValues = ['id', 'title', 'user_id', 'resume', 'content'];
+
+  protected $id;
   protected $title;
-  protected $author_id;
+  protected $user_id;
+  protected $resume;
   protected $content;
   protected $timestamp;
 
@@ -29,20 +46,77 @@ class Note
       }
       else
       {
-        throw new Exception(__METHOD__ . ' : invalid arg key `' . $argk . '`'); // invalid $argk
+        throw new Exception(__METHOD__ . ' : invalid arg name `' . $argk . '`'); // invalid $argk
       }
     }
     return $this;
   }
 
-  public function fetch()
+  public function fetch(int $id = 0) : array
   {
-
+    // Columns that has to be selected are stored as a class' property
+    $c = 0;
+    $toSelect = '';
+    foreach($this->setterAllowedValues as $column)
+    {
+      $toSelect .= $column;
+      $c++;
+      if($c && isset($this->setterAllowedValues[$c]))
+        $toSelect .= ', ';
+    }
+    // Select a record using its id
+    if($id)
+    {
+      $r = $this->dbh->prepare('SELECT ' . $toSelect . ' FROM ' . $this->table . ' WHERE id = :id');
+      $r->bindValue(':id', $id, PDO::PARAM_INT);
+      if($r->excute())
+      {
+        $res = $r->fetch(PDO::FETCH_ASSOC);
+        $r->closeCursor();
+        return $res;
+      }
+      {
+        $r->closeCursor();
+        return [];
+      }
+    }
+    // Select all records
+    else
+    {
+      $r = $this->dbh->query('SELECT ' . $toSelect . ' FROM ' . $this->table);
+      if($r)
+      {
+        $res = $r->fetchAll(PDO::FETCH_ASSOC);
+        $r->closeCursor();
+        return $res;
+      }
+      else {
+        return [];
+      }
+    }
   }
 
   public function save()
   {
+    if(!empty($this->title) && !empty($this->user_id) && !empty($this->resume) && !empty($this->content))
+    {
+      if(empty((int) $this->id))
+      {
+        // INSERT
+        $r = $this->dbh->prepare('INSERT INTO ' . $this->table . ' VALUES(NULL, :title, :user_id, :resume, :content, :time)');
+        $r->bindValue(':title', $this->title, PDO::PARAM_STR);
+        $r->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
+        $r->bindValue(':resume', $this->resume, PDO::PARAM_STR);
+        $r->bindValue(':content', $this->content, PDO::PARAM_STR);
+        $r->bindValue(':time', time(), PDO::PARAM_INT);
+        return $r->execute() ? $this:0;
+      }
+      else
+      {
+        // UPDATE
 
+      }
+    }
   }
 
   public function delete()

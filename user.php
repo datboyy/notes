@@ -39,14 +39,17 @@ else
 {
   if(isset($_POST['username'], $_POST['password']))
   {
-    $templateVars[] = ['login_success', (new User($dbh))->set($_POST)->login()];
-    //
-    //
-    // @NOTE : Any redirection must be written here to prevent the end-user to be redirected to the logout page.
-    //
-    //
-    header('Location: index.php');
-    exit();
+    $templateVars['login_success'] = (new User($dbh))->set($_POST)->login();
+    if($templateVars['login_success'])
+    {
+      //
+      //
+      // @NOTE : Any redirection must be written here to prevent the end-user to be redirected to the logout page.
+      //
+      //
+      header('Location: index.php');
+      exit();
+    }
   }
   require 'templates/login.php';
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
@@ -30,34 +31,22 @@
           et porta diam erat non ipsum. Integer eros libero, tristique sed sodales eu, luctus id sem.
         </p>
         <ul class="notes-list">
+          <?php
+          foreach($templateVars['notes_list'] as $note)
+          {
+          ?>
+            <li>
+              <a href="?id=<?= (int) $note['id']?>">
+                <?= htmlspecialchars($note['title']) ?>
+              </a>
+            </li>
+          <?php
+          }
+          ?>
           <li>
             <a href="#">Trucs et astuces divers</a>
             <span class="tag">
               <a href="#">Général</a>
-            </span>
-          </li>
-          <li>
-            <a href="#">Les utilisateurs MySQL</a>
-            <span class="tag">
-              <a href="#">Bases de données</a>
-            </span>
-          </li>
-          <li>
-            <a href="#">La méthodologie BEM</a>
-            <span class="tag">
-              <a href="#">CSS</a>
-            </span>
-            <span class="tag">
-              <a href="#">HTML</a>
-            </span>
-          </li>
-          <li>
-            <a href="#">Les animations CSS</a>
-            <span class="tag">
-              <a href="#">CSS</a>
-            </span>
-            <span class="tag">
-              <a href="#">HTML</a>
             </span>
           </li>
         </ul>
