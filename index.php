@@ -11,6 +11,13 @@ if(!empty($_GET['id']))
 }
 else
 {
-  $templateVars['notes_list'] = $NoteObj->fetch();
+  $notesList = $NoteObj->fetch();
+  // Explode tags list to retrieve an array of strings
+  foreach($notesList as $k => $v)
+  {
+      $notesList[$k]['tags'] = explode(',', $notesList[$k]['tags']);
+  }
+  // Pass notes list to the template
+  $templateVars['notes_list'] = $notesList;
   require 'templates/index.tpl.php';
 }

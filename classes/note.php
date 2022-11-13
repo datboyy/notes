@@ -85,7 +85,7 @@ class Note
     // Select all records
     else
     {
-      $r = $this->dbh->query('SELECT ' . $toSelect . ' FROM ' . $this->table);
+      $r = $this->dbh->query('SELECT ' . $toSelect . ' FROM ' . $this->table . ' ORDER BY id DESC');
       if($r)
       {
         $res = $r->fetchAll(PDO::FETCH_ASSOC);
@@ -107,7 +107,7 @@ class Note
         // INSERT
         $r = $this->dbh->prepare('INSERT INTO ' . $this->table . ' VALUES(NULL, :title, :tags, :user_id, :resume, :content, :time)');
         $r->bindValue(':title', $this->title, PDO::PARAM_STR);
-        $r->bindValue(':tags', $this->tags, PDOO:PARAM_STR);
+        $r->bindValue(':tags', $this->tags, PDO::PARAM_STR);
         $r->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $r->bindValue(':resume', $this->resume, PDO::PARAM_STR);
         $r->bindValue(':content', $this->content, PDO::PARAM_STR);
@@ -119,7 +119,7 @@ class Note
         // UPDATE
         $r = $this->dbh->prepare('UPDATE ' . $this->table . ' SET title = :title, tags = :tags, resume = :resume, content = :content WHERE id = :id');
         $r->bindValue(':title', $this->title, PDO::PARAM_STR);
-        $r->bindValue(':tags', $this->tags, PDOO:PARAM_STR);
+        $r->bindValue(':tags', $this->tags, PDO::PARAM_STR);
         $r->bindValue(':resume', $this->resume, PDO::PARAM_STR);
         $r->bindValue('content', $this->content, PDO::PARAM_STR);
         $r->bindValue(':id', $this->id, PDO::PARAM_INT);

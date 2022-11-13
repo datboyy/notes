@@ -40,8 +40,18 @@
               <a href="?id=<?= (int) $note['id']?>">
                 <?= htmlspecialchars($note['title']) ?>
               </a>
+              <?php
+              foreach($note['tags'] as $k => $tag)
+              {
+                ?>
+                    <span class="tag">
+                      <a href="#"><?= htmlspecialchars(ucfirst($tag)) ?></a>
+                    </span>
+                <?php
+              }
+              ?>
             </li>
-          <?php
+            <?php
           }
           ?>
           <li>
