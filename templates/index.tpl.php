@@ -2,6 +2,9 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
@@ -10,18 +13,28 @@
       <div class="tags-cloud">
         <h2>Nuage de tags</h2>
         <div class="tags">
-          <span class="tag"><a href="#">Général</a></span>
-          <span class="tag"><a href="#">Base de données</a></span>
-          <span class="tag"><a href="#">CSS</a></span>
-          <span class="tag"><a href="#">HTML</a></span>
-          <span class="tag"><a href="#">Méthodologie</a></span>
-          <span class="tag"><a href="#">Article</a></span>
-          <span class="tag"><a href="#">Trucs et astuces</a></span>
+          <?php
+          foreach($templateVars['tags_list'] as $tag)
+          {
+            $activeClass = !empty($_GET['tag']) && $_GET['tag'] == $tag ? 'active':'';
+          ?>
+            <span class="tag <?= $activeClass ?>"><a href="?tag=<?= htmlspecialchars($tag) ?>"><?= htmlspecialchars($tag) ?></a></span>
+          <?php
+          }
+          ?>
         </div>
       </div> <!-- /.tags-cloud -->
     </div> <!-- /.sidebar -->
     <!-- Header links -->
     <div class="head-links">
+      <?php
+      if(isset($_GET['tag']))
+      {
+      ?>
+        <a href="index.php">Précédent</a>
+      <?php
+      }
+      ?>
       <a href="admin/">Editeur</a>
     </div> <!-- /.header links -->
     <?php require('templates/profile.tpl.php'); ?>
@@ -45,7 +58,7 @@
               {
                 ?>
                     <span class="tag">
-                      <a href="#"><?= htmlspecialchars(ucfirst($tag)) ?></a>
+                      <a href="?tag=<?= htmlspecialchars(ucfirst($tag)) ?>"><?= htmlspecialchars(ucfirst($tag)) ?></a>
                     </span>
                 <?php
               }
@@ -54,12 +67,6 @@
             <?php
           }
           ?>
-          <li>
-            <a href="#">Trucs et astuces divers</a>
-            <span class="tag">
-              <a href="#">Général</a>
-            </span>
-          </li>
         </ul>
       </div> <!-- /.text-container -->
     </div> <!-- /.container -->

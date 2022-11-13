@@ -1,6 +1,7 @@
 <?php
 require 'classes/user.php';
 require 'classes/note.php';
+require 'classes/tag.php';
 
 session_start();
 

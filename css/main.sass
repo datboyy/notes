@@ -41,12 +41,17 @@ body
         align-self: flex-end
         margin-left: 5px
         padding: 5px
-        font-family: 'Roboto'
+        font-family: $content_font
         background-color: #111
         font-size: 14px
         a
+          font-family: $content_font
           text-decoration: none
           color: #999
+        &.active
+          background-color: $text_accent
+          color: #fff
+          font-weight: 700
   .container
     width: 80ch
     padding-top: 1px
