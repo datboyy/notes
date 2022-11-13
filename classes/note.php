@@ -69,7 +69,7 @@ class Note
     {
       $r = $this->dbh->prepare('SELECT ' . $toSelect . ' FROM ' . $this->table . ' WHERE id = :id');
       $r->bindValue(':id', $id, PDO::PARAM_INT);
-      if($r->excute())
+      if($r->execute())
       {
         $res = $r->fetch(PDO::FETCH_ASSOC);
         $r->closeCursor();
@@ -114,7 +114,12 @@ class Note
       else
       {
         // UPDATE
-
+        $r = $this->dbh->prepare('UPDATE ' . $this->table . ' SET title = :title, resume = :resume, content = :content WHERE id = :id');
+        $r->bindValue(':title', $this->title, PDO::PARAM_STR);
+        $r->bindValue(':resume', $this->resume, PDO::PARAM_STR);
+        $r->bindValue('content', $this->content, PDO::PARAM_STR);
+        $r->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $r->execute() ? $this:0;
       }
     }
   }

@@ -22,7 +22,7 @@
     </div> <!-- /.sidebar -->
     <!-- Header links -->
     <div class="head-links">
-      <a href="#">Editeur</a>
+      <a href="admin/">Editeur</a>
     </div> <!-- /.header links -->
     <div class="container">
       <h1>Notes</h1>

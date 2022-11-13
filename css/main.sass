@@ -15,6 +15,9 @@ body
     text-align: right
     a
       text-decoration: none
+      margin-left: 15px
+      &:visited
+        color: blue
   .sidebar
     margin: 150px 0px 0px 30px
     width: 300px
@@ -53,14 +56,17 @@ body
     h1
       padding: $container_spacing
       padding-bottom: 0
-      font-family: 'Roboto'
+      font-family: $content_font
       font-weight: bold
       font-size: 40px
     .text-container
-      font-family: 'Roboto'
+      font-family: $content_font
       line-height: 1.5em
       padding: $container_spacing
       padding-top: 0
+      &--view-article
+        margin-bottom: 20px
+
     .notes-list
       list-style-type: none
       margin: 0
@@ -133,12 +139,14 @@ body
       font-family: $content_font
       font-size: 18px
     textarea
-      resize: none 
+      resize: none
       width: 91%
       padding: 20px
       margin: auto
       font-family: $content_font
-      font-size: 18px
+      font-size: 16px
+      &::placeholder
+        font-size: 18px
     input[type="submit"]
       width: 98%
       background-color: $text_accent
@@ -152,3 +160,28 @@ body
       &:hover
         background-color: $text_accent_secondary
         cursor: pointer
+      input[type="reset"]
+        width: 98%
+        background-color: $text_accent
+        border: 0
+        color: #fff
+        padding: 20px
+        margin-top: 20px
+        font-weight: 600
+        font-family: $content_font
+        font-size: 14px
+
+  .view-title-container
+    .edit-icon
+      float: right
+      margin-top: -80px
+      margin-right: 20px
+      padding-bottom: 50px
+      color: #aaa
+      text-decoration: none
+      &:hover
+        color: #fff
+
+  .view-text-container
+    margin-bottom: 30px
+    text-align: justify
