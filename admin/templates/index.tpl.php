@@ -33,6 +33,8 @@
           ?>
           <label for="title">Note title :</label>
           <input type="text" name="title" id="title" placeholder="Give your note a title.." value="<?= isset($_GET['id']) ? $templateVars['selected_note']['title']:'' ?>">
+          <label for="title">Tags :</label>
+          <input type="text" name="title" id="title" placeholder="Some tags separated with commas.." value="<?= isset($_GET['id']) ? $templateVars['selected_note']['title']:'' ?>">
           <label for="content">Content :</label>
           <textarea name="content" id="content" placeholder="Give your note a content.." rows="15"><?= isset($_GET['id']) ? $templateVars['selected_note']['content']:'' ?></textarea>
           <div class="editor-buttons">

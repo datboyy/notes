@@ -1,24 +1,26 @@
 <?php
 class Note
 {
-/* +---------+--------------+------+-----+---------+----------------+
-   | Field   | Type         | Null | Key | Default | Extra          |
-   +---------+--------------+------+-----+---------+----------------+
-   | id      | int(11)      | NO   | PRI | NULL    | auto_increment |
-   | title   | varchar(255) | NO   |     | NULL    |                |
-   | user_id | int(11)      | NO   |     | NULL    |                |
-   | resume  | text         | NO   |     | NULL    |                |
-   | content | text         | NO   |     | NULL    |                |
-   | time    | int(11)      | NO   |     | NULL    |                |
-   +---------+--------------+------+-----+---------+----------------+*/
+/*+---------+--------------+------+-----+---------+----------------+
+ | Field   | Type         | Null | Key | Default | Extra          |
+ +---------+--------------+------+-----+---------+----------------+
+ | id      | int(11)      | NO   | PRI | NULL    | auto_increment |
+ | title   | varchar(255) | NO   |     | NULL    |                |
+ | tags    | varchar(255) | YES  |     | NULL    |                |
+ | user_id | int(11)      | NO   |     | NULL    |                |
+ | resume  | text         | NO   |     | NULL    |                |
+ | content | text         | NO   |     | NULL    |                |
+ | time    | int(11)      | NO   |     | NULL    |                |
+ +---------+--------------+------+-----+---------+----------------+ */
 
   protected $dbh;
   protected $table = 'notes';
 
-  protected $setterAllowedValues = ['id', 'title', 'user_id', 'resume', 'content'];
+  protected $setterAllowedValues = ['id', 'title', 'tags', 'user_id', 'resume', 'content'];
 
   protected $id;
   protected $title;
+  protected $tags;
   protected $user_id;
   protected $resume;
   protected $content;
@@ -103,8 +105,9 @@ class Note
       if(empty((int) $this->id))
       {
         // INSERT
-        $r = $this->dbh->prepare('INSERT INTO ' . $this->table . ' VALUES(NULL, :title, :user_id, :resume, :content, :time)');
+        $r = $this->dbh->prepare('INSERT INTO ' . $this->table . ' VALUES(NULL, :title, :tags, :user_id, :resume, :content, :time)');
         $r->bindValue(':title', $this->title, PDO::PARAM_STR);
+        $r->bindValue(':tags', $this->tags, PDOO:PARAM_STR);
         $r->bindValue(':user_id', $this->user_id, PDO::PARAM_INT);
         $r->bindValue(':resume', $this->resume, PDO::PARAM_STR);
         $r->bindValue(':content', $this->content, PDO::PARAM_STR);
@@ -114,8 +117,9 @@ class Note
       else
       {
         // UPDATE
-        $r = $this->dbh->prepare('UPDATE ' . $this->table . ' SET title = :title, resume = :resume, content = :content WHERE id = :id');
+        $r = $this->dbh->prepare('UPDATE ' . $this->table . ' SET title = :title, tags = :tags, resume = :resume, content = :content WHERE id = :id');
         $r->bindValue(':title', $this->title, PDO::PARAM_STR);
+        $r->bindValue(':tags', $this->tags, PDOO:PARAM_STR);
         $r->bindValue(':resume', $this->resume, PDO::PARAM_STR);
         $r->bindValue('content', $this->content, PDO::PARAM_STR);
         $r->bindValue(':id', $this->id, PDO::PARAM_INT);
