@@ -6,8 +6,15 @@
   </head>
   <body>
     <div class="head-links">
-      <a href="../index.php">Annuler les modifications</a>
-      <a href="index.php">Accueil</a>
+      <?php
+      if(isset($_GET['id']))
+      {
+      ?>
+        <a href="index.php">Annuler les modifications</a>
+      <?php
+      }
+      ?>
+      <a href="../index.php">Accueil</a>
     </div> <!-- /.header links -->
     <div class="container">
       <h1>Editor</h1>

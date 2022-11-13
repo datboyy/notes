@@ -10,6 +10,7 @@
     <div class="head-links">
       <a href="index.php">Retour</a>
     </div> <!-- /.header links -->
+    <?php require('templates/profile.tpl.php'); ?>
     <div class="container">
       <div class="view-title-container">
         <h1><?= htmlspecialchars($templateVars['note']['title']) ?></h1>
@@ -30,5 +31,6 @@
         </div> <!-- /.view-article -->
       </div> <!-- /.text-container -->
     </div> <!-- /.container -->
+    <?php require('templates/profile.tpl.php'); ?>
   </body>
 </html>

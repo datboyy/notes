@@ -24,6 +24,7 @@
     <div class="head-links">
       <a href="admin/">Editeur</a>
     </div> <!-- /.header links -->
+    <?php require('templates/profile.tpl.php'); ?>
     <div class="container">
       <h1>Notes</h1>
       <div class="text-container">
@@ -52,11 +53,6 @@
         </ul>
       </div> <!-- /.text-container -->
     </div> <!-- /.container -->
-    <div class="profile_container">
-      <img src="imgs/profile_photo.png" />
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus non risus egestas, consequat quam a, fermentum purus.
-          Mauris diam elit, ultrices a ante id, dapibus varius nibh. Fusce vel est ipsum.</p>
-    </div> <!-- /.profile-container -->
     <p class="btm-note">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam venenatis, nisl venenatis rhoncus sagittis,
       tellus magna accumsan felis, et porta diam erat non ipsum. Integer eros libero.</p>
   </body>
