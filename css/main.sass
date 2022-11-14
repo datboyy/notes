@@ -49,9 +49,9 @@ body
           text-decoration: none
           color: #999
         &.active
-          background-color: $text_accent
-          color: #fff
-          font-weight: 700
+          a
+            color: $text_accent
+
   .container
     width: 80ch
     padding-top: 1px
@@ -84,9 +84,9 @@ body
         width: 95%
         font-size: 0.85em
         padding: 10px
-        border-top: 1px solid #eee
+        border-top: 1px solid #555
         &:last-of-type
-          border-bottom: 1px solid #eee
+          border-bottom: 1px solid #555
         a
           flex: 1
           text-decoration: none
@@ -190,3 +190,8 @@ body
   .view-text-container
     margin-bottom: 30px
     text-align: justify
+    color: #eee
+    code
+      display: block
+      background-color: #111
+      color: $text_accent
