@@ -75,6 +75,7 @@ class Note
       {
         $res = $r->fetch(PDO::FETCH_ASSOC);
         $r->closeCursor();
+        $res['content'] = $this->parse($res['content']);
         return $res;
       }
       {
@@ -96,6 +97,15 @@ class Note
         return [];
       }
     }
+  }
+
+  public function parse(string $text) : string
+  {
+    $text = preg_replace_callback('#<code>(.+)</code>#isU', function($matches)
+    {
+      return '<code>' . trim(htmlentities($matches[1])) . '</code>';
+    }, $text);
+    return  $text;
   }
 
   public function save()

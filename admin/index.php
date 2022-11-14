@@ -15,7 +15,7 @@ if($_SESSION['id'] > 1)
 // A Note object to handle CRUD operations
 $NoteObj = new Note($dbh);
 // CREATE, UPDATE
-if(isset($_POST['title'], $_POST['tags'],  $_POST['content']))
+if(!empty($_POST['title']) &&  !empty($_POST['tags']) &&  !empty($_POST['content']))
 {
     if(isset($_GET['id']))
     {
@@ -27,6 +27,11 @@ if(isset($_POST['title'], $_POST['tags'],  $_POST['content']))
             ->set('resume', implode(' ', array_slice(explode(' ', $_POST['content']), 0, 50)))
             ->set('content', $_POST['content'])
             ->save();
+}
+// Some data is missing, an error message is shown
+elseif(!empty($_POST))
+{
+  $templateVars['missing_datas'] = 1;
 }
 // READ all entries to make a list of notes
 $templateVars['note'] = $NoteObj->fetch();

@@ -22,6 +22,18 @@
         <p class="smlr">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam venenatis, nisl venenatis rhoncus sagittis, tellus magna accumsan felis,
           et porta diam erat non ipsum. Integer eros libero, tristique sed sodales eu, luctus id sem.
         </p>
+        <?php
+        if(isset($templateVars['missing_datas']))
+        {
+        ?>
+          <div class="alert alert-error">
+            <p>
+              Some required field have not been completed.
+            </p>
+          </div> <!--/.alert -->
+        <?php
+        }
+        ?>
         <form method="POST">
           <?php
           if(isset($_GET['id']))
