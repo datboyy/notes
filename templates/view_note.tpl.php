@@ -27,7 +27,7 @@
       </div> <!-- /.viex-title-container -->
       <div class="text-container">
         <div class="view-text-container">
-          <?= nl2br(htmlspecialchars($templateVars['note']['content'])) ?>
+          <?= $templateVars['note']['content'] ?>
         </div> <!-- /.view-article -->
       </div> <!-- /.text-container -->
     </div> <!-- /.container -->
