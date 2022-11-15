@@ -21,12 +21,12 @@ if(!empty($_POST['title']) &&  !empty($_POST['tags']) &&  !empty($_POST['content
     {
       $NoteObj->set('id', $_POST['id']);
     }
-    $NoteObj->set('title', $_POST['title'])
-            ->set('tags', $_POST['tags'])
-            ->set('user_id', $_SESSION['id'])
-            ->set('resume', implode(' ', array_slice(explode(' ', $_POST['content']), 0, 50)))
-            ->set('content', $_POST['content'])
-            ->save();
+    $templateVars['save_note_success'] = $NoteObj->set('title', $_POST['title'])
+                                                  ->set('tags', $_POST['tags'])
+                                                  ->set('user_id', $_SESSION['id'])
+                                                  ->set('resume', implode(' ', array_slice(explode(' ', $_POST['content']), 0, 50)))
+                                                  ->set('content', $_POST['content'])
+                                                  ->save();
 }
 // Some data is missing, an error message is shown
 elseif(!empty($_POST))

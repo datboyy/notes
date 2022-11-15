@@ -33,6 +33,14 @@
           </div> <!--/.alert -->
         <?php
         }
+        elseif(!empty($templateVars['save_note_success']))
+        {
+        ?>
+          <div class="alert alert-success">
+            <p>Your modifications have been saved.</p>
+          </div>
+        <?php
+        }
         ?>
         <form method="POST">
           <?php
