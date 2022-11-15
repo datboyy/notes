@@ -24,10 +24,6 @@
           <?php
           }
           ?>
-          <!-- Note title -->
-          <label for="title">Note title :</label>
-          <input type="text" name="title" id="title" placeholder="Give your note a title.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['title']
-                                                                                                        :(!empty($_POST['title']) ? $_POST['title']:'') ?>">
           <!-- Note tags -->
           <label for="title">Tags :</label>
           <input type="text" name="tags" id="tags" placeholder="Some tags separated with commas.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['tags']

@@ -1,6 +1,6 @@
 <?php
 define('ADMIN', 1);
-define('PREFIX', '..');
+define('PREFIX', '../');
 define('MODULE', 'cheatsheet');
 
 require '../config.php';
@@ -17,17 +17,16 @@ if($_SESSION['id'] > 1)
   exit();
 }
 // A Cheatsheet object to handle CRUD operations
-$CheatsheetObj = new Note($dbh);
+$CheatsheetObj = new Cheatsheet($dbh);
 
-if(!empty($_POST['title']) && !empty($_POST['tags']) &&  !empty($_POST['content']))
+if(!empty($_POST['tags']) &&  !empty($_POST['content']))
 {
   if(!empty($_POST['id']))
   {
     $CheatsheetObj->set('id', $_POST['id']);
   }
-  $templateVars['add_cheatsheet_success'] = $CheatsheetObj->set($_POST['title'])
-                                                          ->set($_POST['tags'])
-                                                          ->set($_POST['content'])
+  $templateVars['add_cheatsheet_success'] = $CheatsheetObj->set('tags', $_POST['tags'])
+                                                          ->set('content', $_POST['content'])
                                                           ->save();
 }
 require 'templates/cheatsheets.tpl.php';

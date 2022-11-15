@@ -7,7 +7,10 @@
   <body>
     <?php include('templates/menu.tpl.php'); ?>
     <div class="container">
-      <h1>Notes</h1>
+      <div class="title-container">
+        <h1>Notes</h1>
+        <i class="fa-regular fa-ellipsis"></i>
+      </div> <!-- /.title-container --> 
       <div class="text-container">
         <p class="smlr">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam venenatis, nisl venenatis rhoncus sagittis, tellus magna accumsan felis,
           et porta diam erat non ipsum. Integer eros libero, tristique sed sodales eu, luctus id sem.

@@ -3,7 +3,6 @@
   | Field     | Type         | Null | Key | Default | Extra          |
   +-----------+--------------+------+-----+---------+----------------+
   | id        | int(11)      | NO   | PRI | NULL    | auto_increment |
-  | title     | varchar(255) | NO   |     | NULL    |                |
   | tags      | varchar(255) | NO   |     | NULL    |                |
   | content   | text         | NO   |     | NULL    |                |
   | timestamp | int(11)      | NO   |     | NULL    |                |
@@ -12,14 +11,13 @@ class Cheatsheet
 {
 
   protected $dbh;
-  protected $table = 'cheasheets';
+  protected $table = 'cheatsheets';
 
   protected $id;
-  protected $title;
   protected $tags;
   protected $content;
   protected $timestamp;
-  protected $setterAllowedValues = ['id', 'title', 'tags', 'content'];
+  protected $setterAllowedValues = ['id', 'tags', 'content'];
 
   public function __construct(PDO $dbh)
   {
@@ -51,22 +49,20 @@ class Cheatsheet
 
   public function save() : int
   {
-    if(!empty($_GET['id']))
+    if(empty($_GET['id']))
     {
-      $r = $this->dbh->prepare('UPDATE ' . $this->table . ' SET title = :title, tags = :tags, content = :content WHERE id = :id');
-      $r->bindValue(':title', $this->title, PDO::PARAM_STR);
-      $r->bindValue(':tags', $this->tags, PDO::PARAM_STR);
-      $r->bindValue(':content', $this->content, PDO::PARAM_STR);
-      $r->bindValue(':id', $this->id, PDO::PARAM_STR);
-      return (int) $r->execute();
-    }
-    else
-    {
-      $r = $this->dbh->prepare('INSERT INTO ' . $this->table . 'VALUES(NULL, :title, :tags, :content, :timestamp)');
-      $r->bindValue(':title', $this->title, PDO::PARAM_STR);
+      $r = $this->dbh->prepare('INSERT INTO ' . $this->table . ' VALUES(NULL, :tags, :content, :timestamp)');
       $r->bindValue(':tags', $this->tags, PDO::PARAM_STR);
       $r->bindValue(':content', $this->content, PDO::PARAM_STR);
       $r->bindValue(':timestamp', time());
+      return $d = $r->execute();
+    }
+    else
+    {
+      $r = $this->dbh->prepare('UPDATE ' . $this->table . ' SET tags = :tags, content = :content WHERE id = :id');
+      $r->bindValue(':tags', $this->tags, PDO::PARAM_STR);
+      $r->bindValue(':content', $this->content, PDO::PARAM_STR);
+      $r->bindValue(':id', $this->id, PDO::PARAM_STR);
       return (int) $r->execute();
     }
   }
