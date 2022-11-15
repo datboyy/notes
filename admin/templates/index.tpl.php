@@ -5,19 +5,9 @@
     <link rel="stylesheet" href="../css/main.css" />
   </head>
   <body>
-    <div class="head-links">
-      <?php
-      if(isset($_GET['id']))
-      {
-      ?>
-        <a href="index.php">Annuler les modifications</a>
-      <?php
-      }
-      ?>
-      <a href="../index.php">Accueil</a>
-    </div> <!-- /.header links -->
+    <?php include('templates/menu.tpl.php'); ?>
     <div class="container">
-      <h1>Editor</h1>
+      <h1>Notes</h1>
       <div class="text-container">
         <p class="smlr">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam venenatis, nisl venenatis rhoncus sagittis, tellus magna accumsan felis,
           et porta diam erat non ipsum. Integer eros libero, tristique sed sodales eu, luctus id sem.
@@ -51,6 +41,11 @@
           <?php
           }
           ?>
+          <!--
+
+                Notes editor
+
+          -->
           <!-- Note title -->
           <label for="title">Note title :</label>
           <input type="text" name="title" id="title" placeholder="Give your note a title.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['title']

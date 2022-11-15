@@ -1,4 +1,6 @@
 <?php
+define('ADMIN', 1);
+define('MODULE', 'notes');
 require '../config.php';
 
 if(!$UserObj->isLoggedIn())

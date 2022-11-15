@@ -1,7 +1,10 @@
 <?php
-require 'classes/user.php';
-require 'classes/note.php';
-require 'classes/tag.php';
+$prefix = defined('ADMIN') && ADMIN ? '../':'';
+
+require  $prefix . 'classes/user.php';
+require  $prefix . 'classes/note.php';
+require  $prefix . 'classes/tag.php';
+require  $prefix . 'classes/cheatsheet.php';
 
 session_start();
 

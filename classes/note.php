@@ -1,6 +1,4 @@
 <?php
-class Note
-{
 /*+---------+--------------+------+-----+---------+----------------+
  | Field   | Type         | Null | Key | Default | Extra          |
  +---------+--------------+------+-----+---------+----------------+
@@ -12,7 +10,8 @@ class Note
  | content | text         | NO   |     | NULL    |                |
  | time    | int(11)      | NO   |     | NULL    |                |
  +---------+--------------+------+-----+---------+----------------+ */
-
+class Note
+{
   protected $dbh;
   protected $table = 'notes';
 

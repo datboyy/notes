@@ -12,14 +12,14 @@ class Cheatsheet
 {
 
   protected $dbh;
-  protected $table = 'cheasheets'
+  protected $table = 'cheasheets';
 
   protected $id;
-  protected $title
+  protected $title;
   protected $tags;
   protected $content;
   protected $timestamp;
-  protected $this->setterAllowedValues = ['id', 'title', 'tags', 'content']:
+  protected $setterAllowedValues = ['id', 'title', 'tags', 'content'];
 
   public function __construct(PDO $dbh)
   {
@@ -49,19 +49,64 @@ class Cheatsheet
     return $this;
   }
 
-  public function __construct(PDO $dbh)
+  public function save() : int
   {
-    $this->dbh = $dbh;
+    if(!empty($_GET['id']))
+    {
+      $r = $this->dbh->prepare('UPDATE ' . $this->table . ' SET title = :title, tags = :tags, content = :content WHERE id = :id');
+      $r->bindValue(':title', $this->title, PDO::PARAM_STR);
+      $r->bindValue(':tags', $this->tags, PDO::PARAM_STR);
+      $r->bindValue(':content', $this->content, PDO::PARAM_STR);
+      $r->bindValue(':id', $this->id, PDO::PARAM_STR);
+      return (int) $r->execute();
+    }
+    else
+    {
+      $r = $this->dbh->prepare('INSERT INTO ' . $this->table . 'VALUES(NULL, :title, :tags, :content, :timestamp)');
+      $r->bindValue(':title', $this->title, PDO::PARAM_STR);
+      $r->bindValue(':tags', $this->tags, PDO::PARAM_STR);
+      $r->bindValue(':content', $this->content, PDO::PARAM_STR);
+      $r->bindValue(':timestamp', time());
+      return (int) $r->execute();
+    }
   }
 
-  public function save()
+  public function fetch() : array
   {
-
-  }
-
-  public function fetch()
-  {
-
+    // Columns that has to be selected are stored as a class' property
+    $c = 0;
+    $toSelect = '';
+    foreach($this->setterAllowedValues as $column)
+    {
+      $toSelect .= $column;
+      $c++;
+      if($c && isset($this->setterAllowedValues[$c]))
+        $toSelect .= ', ';
+    }
+    if(!empty($this->id))
+    {
+      $r = $this->prepare('SELECT ' . $toSelect . ' FROM ' . $this->table . ' WHERE id = :id ');
+      $r->bindValue(':id', $this->id, PDO::PARAM_INT);
+      if(!$r->execute())
+      {
+        $r->closeCursor();
+        return [];
+      }
+      $res = $r->fetchAll(PDO::FETCH_ASSOC);
+      $r->closeCursor();
+      return $res;
+    }
+    else
+    {
+      $r = $this->dbh->query('SELECT ' . $toSelect . ' FROM ' . $this->table);
+      if(!$r)
+      {
+        return [];
+      }
+      $res = $r->fetch(PDO::FETCH_ASSOC);
+      $r->closeCursor();
+      return $res;
+    }
   }
 
   public function delete()
