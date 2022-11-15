@@ -51,12 +51,20 @@
           <?php
           }
           ?>
+          <!-- Note title -->
           <label for="title">Note title :</label>
-          <input type="text" name="title" id="title" placeholder="Give your note a title.." value="<?= isset($_GET['id']) ? $templateVars['selected_note']['title']:'' ?>">
+          <input type="text" name="title" id="title" placeholder="Give your note a title.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['title']
+                                                                                                        :(!empty($_POST['title']) ? $_POST['title']:'') ?>">
+          <!-- Note tags -->
           <label for="title">Tags :</label>
-          <input type="text" name="tags" id="tags" placeholder="Some tags separated with commas.." value="<?= isset($_GET['id']) ? $templateVars['selected_note']['tags']:'' ?>">
+          <input type="text" name="tags" id="tags" placeholder="Some tags separated with commas.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['tags']
+                                                                                                                :(!empty($_POST['tags']) ? $_POST['tags']:'') ?>">
+          <!-- Note content -->
           <label for="content">Content :</label>
-          <textarea name="content" id="content" placeholder="Give your note a content.." rows="15"><?= isset($_GET['id']) ? $templateVars['selected_note']['content']:'' ?></textarea>
+          <textarea name="content" id="content" placeholder="Give your note a content.." rows="15"><?=  (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['content']
+                                                                                                        :(!empty($_POST['content']) ? $_POST['content']:'')
+        ?></textarea>
+          <!-- Submit button -->
           <div class="editor-buttons">
             <input type="submit" value="Submit" />
           </div>
