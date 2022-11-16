@@ -108,7 +108,7 @@
                 foreach(explode(',', $note['tags']) as $tag)
                 {
                 ?>
-                  <span class="tag"><?= htmlspecialchars($tag) ?></span>
+                  <span class="tag"><?= ucfirst(htmlspecialchars($tag)) ?></span>
                 <?php
                 }
                 ?>
