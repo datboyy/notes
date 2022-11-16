@@ -86,6 +86,16 @@ form
   font-family: $content_font
   font-weight: 700
   padding: 10px
+  a
+    color: $error_text_color
+    text-decoration: none
+  input + a
+    margin-left: 15px
+  form
+    margin-bottom: 0
+  input[type="submit"], button
+      width: 50%
+      background-color: $error_text_color
   &-success
     background: $success_color
     color: $success_text_color
@@ -100,9 +110,10 @@ form
   padding: 5px
   background-color: #111
   font-size: 12px
+  color: #ccc
   a
     text-decoration: none
-    color: #999
+    color: #ccc
 
 .modal
   position: absolute

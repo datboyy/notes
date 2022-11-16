@@ -20,6 +20,18 @@
           <ul>
             <li><a href="index.php">Nouveau</a></li>
             <li data-modal="open-note-modal">Ouvrir</li>
+            <?php
+            if(isset($_GET['id']))
+            {
+            ?>
+              <li data-modal="open-note-modal">
+                <a href="?id=<?= intval($_GET['id']) ?>&amp;delete=<?= intval($_GET['id']) ?>">
+                  Supprimer
+                </a>
+              </li>
+            <?php
+            }
+            ?>
           </ul>
         </div>
       </div> <!-- /.title-container -->
@@ -28,9 +40,10 @@
           et porta diam erat non ipsum. Integer eros libero, tristique sed sodales eu, luctus id sem.
         </p>
         <?php
-        if(isset($templateVars['missing_datas']))
+        if(isset($templateVars['missing_datas']) && !isset($_POST['delete']))
         {
         ?>
+          <!-- Missing data error -->
           <div class="alert alert-error">
             <p>
               Some required field have not been completed.
@@ -41,12 +54,41 @@
         elseif(!empty($templateVars['save_note_success']))
         {
         ?>
+          <!-- Data saved success message  -->
           <div class="alert alert-success">
             <p>Your modifications have been saved.</p>
           </div>
         <?php
         }
+        elseif(isset($_GET['delete']) && !isset($_POST['delete']))
+        {
         ?>
+          <!-- Deletion confirmation form -->
+          <div class="alert alert-error">
+            <form method="POST" action="index.php">
+              <input type="hidden" name="delete" value="<?= intval($_GET['delete']) ?>" />
+              Are you sure you want to delete this note ?
+              <input type="submit" value="Yes, delete it !" />
+              <a href="index.php?id=<?= intval($_GET['id']) ?>">Retour</a>
+            </form>
+          </div> <!-- /.allert-success -->
+        <?php
+        }
+        elseif(!empty($templateVars['delete_success']))
+        {
+        ?>
+          <!-- Deletion confirmation message -->
+          <div class="alert alert-success">
+            The selected note has been removed.
+          </div> <!-- .alert-succcess -->
+        <?php
+        }
+        ?>
+        <!--
+
+              Notes editor
+
+        -->
         <form method="POST">
           <?php
           if(isset($_GET['id']))
@@ -56,11 +98,6 @@
           <?php
           }
           ?>
-          <!--
-
-                Notes editor
-
-          -->
           <!-- Note title -->
           <label for="title">Note title :</label>
           <input type="text" name="title" id="title" placeholder="Give your note a title.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['title']
@@ -108,7 +145,7 @@
                 foreach(explode(',', $note['tags']) as $tag)
                 {
                 ?>
-                  <span class="tag"><?= ucfirst(htmlspecialchars($tag)) ?></span>
+                  <span class="tag"><?= ucfirst(trim(htmlspecialchars($tag))) ?></span>
                 <?php
                 }
                 ?>

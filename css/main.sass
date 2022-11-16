@@ -98,12 +98,14 @@ body
         font-size: 0.85em
         padding: 10px
         border-top: 1px solid #555
-        &:last-of-type
-          border-bottom: 1px solid #555
-        a
+        a:first-of-type
           flex: 1
           text-decoration: none
           color: #ff0255
+        &:last-of-type
+          border-bottom: 1px solid #555
+        .tag a
+          color: #aaa
 
   .profile_container
     display: flex

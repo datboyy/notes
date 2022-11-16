@@ -137,8 +137,14 @@ class Note
     }
   }
 
-  public function delete()
+  public function delete() : int
   {
-
+    if(!empty($this->id))
+    {
+      $r = $this->dbh->prepare('DELETE FROM ' . $this->table . ' WHERE id = :id');
+      $r->bindvalue(':id', $this->id, PDO::PARAM_INT);
+      return (int) $r->execute();
+    }
+    return 0;
   }
 }
