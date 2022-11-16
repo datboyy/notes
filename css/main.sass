@@ -104,15 +104,6 @@ body
           flex: 1
           text-decoration: none
           color: #ff0255
-        .tag
-          align-self: flex-end
-          margin-left: 5px
-          padding: 5px
-          background-color: #111
-          font-size: 12px
-          a
-            text-decoration: none
-            color: #999
 
   .profile_container
     display: flex
@@ -223,36 +214,36 @@ body
         background-color: #000
         color: #fff
         cursor: pointer
+      a
+        display: block
+        width: 100%
+        color: #aaa
+        text-decoration: none
 
-.modal
-  position: absolute
-  top: 40px
-  left: 40px
-  z-index: 99
-  min-width: 80ch
-  min-height: 400px
-  background-color: #050505
-  border: 1px solid #151515
-  box-shadow: 5px 5px 15px 5px rgba(0,0,0,1)
-  .modal-title
-    width: 95%
-    margin: auto
-    margin-top: 2px
-    padding: 10px
-    background-color: #000
-    font-family: $content_font
-    font-size: 13px
-    color: #ccc
-    i.fa-folder
-      margin-right: 15px
-    i.fa-xmark
-      float: right
-      &:hover
-        color: #fff
-        cursor: pointer
-  .modal-body
-    padding: 5px 25px 10px 25px
-    font-family: $content_font
-    p
-      color: #ccc
-      font-size: 14px
+#open-note-modal
+ ul
+   list-style-type: none
+   padding: 0
+   margin: 0
+   li
+     width: 95%
+     display: flex
+     flex: 2
+     justify-content: center
+     color: #fff
+     font-size: 15px
+     padding: 10px
+     &:nth-child(odd)
+       background-color: #151515
+     a
+       text-decoration: none
+       color: blue
+     .note_title
+       flex: 1
+     .note_date
+       align-self: flex-end
+       font-size: 13px
+       color: #aaa
+     .tags
+       color: #aaa
+       margin-right: 30px

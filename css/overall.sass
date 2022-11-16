@@ -71,6 +71,9 @@ form
 .text-accent
   color: $text-accent
 
+.text-monospace
+  font-family: monospace
+
 .smlr
   font-size: 12.5px
   line-height: 1.3em
@@ -89,3 +92,47 @@ form
   &-error
     background: $error_color
     color: $error_text_color
+
+
+.tag
+  align-self: flex-end
+  margin-left: 5px
+  padding: 5px
+  background-color: #111
+  font-size: 12px
+  a
+    text-decoration: none
+    color: #999
+
+.modal
+  position: absolute
+  top: 40px
+  left: 40px
+  z-index: 99
+  min-width: 80ch
+  padding-bottom: 20px
+  background-color: #050505
+  border: 1px solid #151515
+  box-shadow: 5px 5px 15px 5px rgba(0,0,0,1)
+  .modal-title
+    width: 95%
+    margin: auto
+    margin-top: 2px
+    padding: 10px
+    background-color: #000
+    font-family: $content_font
+    font-size: 13px
+    color: #ccc
+    i.fa-folder
+      margin-right: 15px
+    i.fa-xmark
+      float: right
+      &:hover
+        color: #fff
+        cursor: pointer
+  .modal-body
+    padding: 5px 25px 10px 25px
+    font-family: $content_font
+    p
+      color: #ccc
+      font-size: 14px

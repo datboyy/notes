@@ -15,7 +15,7 @@ class Note
   protected $dbh;
   protected $table = 'notes';
 
-  protected $setterAllowedValues = ['id', 'title', 'tags', 'user_id', 'resume', 'content'];
+  protected $setterAllowedValues = ['id', 'title', 'tags', 'user_id', 'resume', 'content', 'time'];
 
   protected $id;
   protected $title;

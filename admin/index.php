@@ -46,5 +46,8 @@ if(isset($_GET['id']))
     unset($_GET['id']); // no result found
   }
 }
+
+$templateVars['notes_list'] = $NoteObj->fetch();
+
 require 'templates/index.tpl.php';
 // EOF

@@ -18,7 +18,7 @@
         <i class="fa-solid fa-ellipsis"></i>
         <div class="admin-toggle-menu d-none">
           <ul>
-            <li>Nouveau</li>
+            <li><a href="index.php">Nouveau</a></li>
             <li data-modal="open-note-modal">Ouvrir</li>
           </ul>
         </div>
@@ -71,8 +71,8 @@
                                                                                                                 :(!empty($_POST['tags']) ? $_POST['tags']:'') ?>">
           <!-- Note content -->
           <label for="content">Content :</label>
-          <textarea name="content" id="content" placeholder="Give your note a content.." rows="15"><?=  (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['content']
-                                                                                                        :(!empty($_POST['content']) ? $_POST['content']:'')
+          <textarea class="text-monospace" name="content" id="content" placeholder="Give your note a content.." rows="15"><?=  (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['content']
+                                                                                                                                  :(!empty($_POST['content']) ? $_POST['content']:'')
         ?></textarea>
           <!-- Submit button -->
           <div class="editor-buttons">
@@ -94,6 +94,33 @@
       </div> <!-- /.modal__title -->
       <div class="modal-body">
         <p>Sélectionnez la note que vous souhaitez éditer.</p>
+        <ul>
+          <?php
+          foreach($templateVars['notes_list'] as $note)
+          {
+          ?>
+            <li>
+              <span class="note_title">
+                  <a href="?id=<?= intval($note['id']) ?>"><?= htmlspecialchars($note['title']) ?></a>
+              </span>
+              <div class="tags">
+                <?php
+                foreach(explode(',', $note['tags']) as $tag)
+                {
+                ?>
+                  <span class="tag"><?= htmlspecialchars($tag) ?></span>
+                <?php
+                }
+                ?>
+              </div> <!-- tags -->
+              <span class="note_date">
+                  <?= date('d/m/Y', $note['time']) ?>
+              </span>
+            </li>
+          <?php
+          }
+          ?>
+        </ul>
       </div>
     </div> <!-- /.modal -->
 
