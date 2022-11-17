@@ -24,7 +24,7 @@
             if(isset($_GET['id']))
             {
             ?>
-              <li data-modal="open-note-modal">
+              <li>
                 <a href="?id=<?= intval($_GET['id']) ?>&amp;delete=<?= intval($_GET['id']) ?>">
                   Supprimer
                 </a>

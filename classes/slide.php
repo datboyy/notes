@@ -3,21 +3,23 @@
   | Field     | Type         | Null | Key | Default | Extra          |
   +-----------+--------------+------+-----+---------+----------------+
   | id        | int(11)      | NO   | PRI | NULL    | auto_increment |
+  | title     | varchar(255) | YES  |     | NULL    |                |
   | tags      | varchar(255) | NO   |     | NULL    |                |
   | content   | text         | NO   |     | NULL    |                |
   | timestamp | int(11)      | NO   |     | NULL    |                |
-  +-----------+--------------+------+-----+---------+----------------+ */
-class Cheatsheet
+  +-----------+--------------+------+-----+---------+----------------+*/
+class Slide
 {
 
   protected $dbh;
   protected $table = 'cheatsheets';
 
   protected $id;
+  protected $title;
   protected $tags;
   protected $content;
   protected $timestamp;
-  protected $setterAllowedValues = ['id', 'tags', 'content'];
+  protected $setterAllowedValues = ['id', 'title', 'tags', 'content'];
 
   public function __construct(PDO $dbh)
   {

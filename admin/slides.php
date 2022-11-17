@@ -1,7 +1,7 @@
 <?php
 define('ADMIN', 1);
 define('PREFIX', '../');
-define('MODULE', 'cheatsheet');
+define('MODULE', 'slides');
 
 require '../config.php';
 
@@ -17,16 +17,16 @@ if($_SESSION['id'] > 1)
   exit();
 }
 // A Cheatsheet object to handle CRUD operations
-$CheatsheetObj = new Cheatsheet($dbh);
+$SlideObj = new Slide($dbh);
 
 if(!empty($_POST['tags']) &&  !empty($_POST['content']))
 {
   if(!empty($_POST['id']))
   {
-    $CheatsheetObj->set('id', $_POST['id']);
+    $SlideObj->set('id', $_POST['id']);
   }
-  $templateVars['add_cheatsheet_success'] = $CheatsheetObj->set('tags', $_POST['tags'])
-                                                          ->set('content', $_POST['content'])
-                                                          ->save();
+  $templateVars['add_slide_success'] = $SlideObj->set('tags', $_POST['tags'])
+                                                ->set('content', $_POST['content'])
+                                                ->save();
 }
-require 'templates/cheatsheets.tpl.php';
+require 'templates/slides.tpl.php';

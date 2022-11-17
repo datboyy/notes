@@ -16,7 +16,7 @@
     <li>
       <a href="index.php" class="<?= MODULE == 'notes' ? 'active':'' ?>">Notes</a></li>
     <li>
-      <a href="cheatsheets.php" class="<?= MODULE == 'cheatsheet' ? 'active':'' ?>">Cheatsheets</a>
+      <a href="slides.php" class="<?= MODULE == 'slides' ? 'active':'' ?>">Slides</a>
     </li>
   </ul>
 </div> <!-- /admin-head-menu -->

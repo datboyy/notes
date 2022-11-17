@@ -4,7 +4,7 @@ $prefix = defined('ADMIN') && ADMIN ? '../':'';
 require  $prefix . 'classes/user.php';
 require  $prefix . 'classes/note.php';
 require  $prefix . 'classes/tag.php';
-require  $prefix . 'classes/cheatsheet.php';
+require  $prefix . 'classes/slide.php';
 
 session_start();
 
