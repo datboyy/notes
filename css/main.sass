@@ -240,10 +240,9 @@ body
      a
        text-decoration: none
        color: blue
-     .note_title
+     .note_title, .slide_title
        flex: 1
-     .note_date
-       align-self: flex-end
+     .note_date, .slide_date
        font-size: 13px
        color: #aaa
      .tags
@@ -272,7 +271,6 @@ html, body
       flex-direction: column
       color: #ccc
       h2
-        margin-top: -20px
         text-align: center
         font-size: 50px
       p
@@ -286,6 +284,9 @@ html, body
           margin-top: 15px
           line-height: 25px
           text-align: justify
+      a
+        color: $text-accent
+        text-decoration: none 
   .cta
     width: 100px
     float: right
