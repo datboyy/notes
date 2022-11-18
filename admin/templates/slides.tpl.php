@@ -20,7 +20,7 @@
         <i class="fa-solid fa-ellipsis"></i>
         <div class="admin-toggle-menu d-none">
           <ul>
-            <li><a href="index.php">Nouveau</a></li>
+            <li><a href="slides.php">Nouveau</a></li>
             <li data-modal="open-slide-modal">Ouvrir</li>
             <?php
             if(isset($_GET['id']))
@@ -77,7 +77,7 @@
         <!--
               Cheatsheet edition form
         -->
-        <form method="POST">
+        <form method="POST" action="slides.php">
           <?php
           if(isset($_GET['id']))
           {
@@ -124,7 +124,7 @@
           {
           ?>
             <li>
-              <span class="note_title">
+              <span class="slide_title">
                   <a href="?id=<?= intval($note['id']) ?>"><?= htmlspecialchars($note['title']) ?></a>
               </span>
               <div class="tags">
@@ -137,7 +137,7 @@
                 }
                 ?>
               </div> <!-- tags -->
-              <span class="note_date">
+              <span class="slide_date">
                   <?= date('d/m/Y', $note['timestamp']) ?>
               </span>
             </li>

@@ -27,7 +27,7 @@ if(empty($templateVars['slide']))
           <?= $templateVars['slide']['content']; ?>
         </div> <!-- /.slide-content -->
       </div> <!-- /.slide -->
-      <a href="slide.php" class="cta">Suivant</a>
+      <a href="slides.php" class="cta">Suivant</a>
     </div> <!-- /.slide-container -->
   </body>
 </html>

@@ -88,7 +88,7 @@ class Note
           return [];
         }
         $r->closeCursor();
-        $res['content'] = $this->parse($res['content']);
+        $res['content'] = Utils::parse_code_blocks($res['content']);
         return $res;
       }
       {
@@ -110,15 +110,6 @@ class Note
         return [];
       }
     }
-  }
-
-  public function parse(string $text) : string
-  {
-    $text = preg_replace_callback('#<code>(.+)</code>#isU', function($matches)
-    {
-      return '<code>' . trim(htmlentities($matches[1])) . '</code>';
-    }, $text);
-    return  $text;
   }
 
   public function save()

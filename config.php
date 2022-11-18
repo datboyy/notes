@@ -1,6 +1,7 @@
 <?php
 $prefix = defined('ADMIN') && ADMIN ? '../':'';
 
+require  $prefix . 'classes/utils.php';
 require  $prefix . 'classes/user.php';
 require  $prefix . 'classes/note.php';
 require  $prefix . 'classes/tag.php';

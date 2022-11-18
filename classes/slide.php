@@ -119,6 +119,7 @@ class Slide
         return [];
       }
       $res = $r->fetch(PDO::FETCH_ASSOC);
+      $res["content"] = Utils::parse_code_blocks($res['content']);
       $r->closeCursor();
       return $res;
     }
