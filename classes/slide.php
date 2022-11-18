@@ -125,7 +125,7 @@ class Slide
     }
     else
     {
-      $r = $this->dbh->query('SELECT ' . $toSelect . ' FROM ' . $this->table);
+      $r = $this->dbh->query('SELECT ' . $toSelect . ' FROM ' . $this->table . ' ORDER BY id DESC');
       if(!$r)
       {
         return [];
