@@ -77,12 +77,12 @@
         <!--
               Cheatsheet edition form
         -->
-        <form method="POST" action="slides.php">
+        <form method="POST" action="slides.php<?= isset($_GET['id']) ? '?id=' . intval($_GET['id']):''?>">
           <?php
           if(isset($_GET['id']))
           {
           ?>
-            <input type="hidden" name="id" value="<?= (int) $_GET['id'] ?>" />
+            <input type="hidden" name="id" value="<?= intval($_GET['id']) ?>" />
           <?php
           }
           ?>

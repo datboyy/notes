@@ -61,7 +61,7 @@ class Slide
 
   public function save() : int
   {
-    if(empty($_GET['id']))
+    if(empty($this->id))
     {
       $r = $this->dbh->prepare('INSERT INTO ' . $this->table . ' VALUES(NULL, :title, :tags, :content, :timestamp)');
       $r->bindValue(':title', $this->title, PDO::PARAM_STR);
