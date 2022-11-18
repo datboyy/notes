@@ -12,14 +12,14 @@ class Slide
 {
 
   protected $dbh;
-  protected $table = 'cheatsheets';
+  protected $table = 'slides';
 
   protected $id;
   protected $title;
   protected $tags;
   protected $content;
   protected $timestamp;
-  protected $setterAllowedValues = ['id', 'title', 'tags', 'content'];
+  protected $setterAllowedValues = ['id', 'title', 'tags', 'content', 'timestamp'];
 
   public function __construct(PDO $dbh)
   {
@@ -49,19 +49,31 @@ class Slide
     return $this;
   }
 
+  public function reset() : object
+  {
+    $this->id = 0;
+    $this->title = NULL;
+    $this->tags = NULL;
+    $this->content = NULL;
+    $this->timestamp = NULL;
+    return $this;
+  }
+
   public function save() : int
   {
     if(empty($_GET['id']))
     {
-      $r = $this->dbh->prepare('INSERT INTO ' . $this->table . ' VALUES(NULL, :tags, :content, :timestamp)');
+      $r = $this->dbh->prepare('INSERT INTO ' . $this->table . ' VALUES(NULL, :title, :tags, :content, :timestamp)');
+      $r->bindValue(':title', $this->title, PDO::PARAM_STR);
       $r->bindValue(':tags', $this->tags, PDO::PARAM_STR);
       $r->bindValue(':content', $this->content, PDO::PARAM_STR);
       $r->bindValue(':timestamp', time());
-      return $d = $r->execute();
+      return (int) $r->execute();
     }
     else
     {
-      $r = $this->dbh->prepare('UPDATE ' . $this->table . ' SET tags = :tags, content = :content WHERE id = :id');
+      $r = $this->dbh->prepare('UPDATE ' . $this->table . ' SET title = :title, tags = :tags, content = :content WHERE id = :id');
+      $r->bindValue(':title', $this->title, PDO::PARAM_STR);
       $r->bindValue(':tags', $this->tags, PDO::PARAM_STR);
       $r->bindValue(':content', $this->content, PDO::PARAM_STR);
       $r->bindValue(':id', $this->id, PDO::PARAM_STR);
@@ -83,14 +95,14 @@ class Slide
     }
     if(!empty($this->id))
     {
-      $r = $this->prepare('SELECT ' . $toSelect . ' FROM ' . $this->table . ' WHERE id = :id ');
+      $r = $this->dbh->prepare('SELECT ' . $toSelect . ' FROM ' . $this->table . ' WHERE id = :id ');
       $r->bindValue(':id', $this->id, PDO::PARAM_INT);
       if(!$r->execute())
       {
         $r->closeCursor();
         return [];
       }
-      $res = $r->fetchAll(PDO::FETCH_ASSOC);
+      $res = $r->fetch(PDO::FETCH_ASSOC);
       $r->closeCursor();
       return $res;
     }
@@ -101,15 +113,21 @@ class Slide
       {
         return [];
       }
-      $res = $r->fetch(PDO::FETCH_ASSOC);
+      $res = $r->fetchAll(PDO::FETCH_ASSOC);
       $r->closeCursor();
       return $res;
     }
   }
 
-  public function delete()
+  public function delete() : int
   {
-
+    if(isset($_GET['id']))
+    {
+      $r = $this->dbh->prepare('DELETE FROM ' . $this->table . ' WHERE id = :id');
+      $r->bindValue(':id', $this->id, PDO::PARAM_INT);
+      return (int) $r->execute();
+    }
+    return 0;
   }
 }
-// EF
+// EOF

@@ -53,4 +53,5 @@ if(isset($_GET['id'])) // Note specified by id
 $templateVars['notes_list'] = $NoteObj->fetch();
 
 require 'templates/index.tpl.php';
+
 // EOF

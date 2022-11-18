@@ -53,6 +53,16 @@ class Note
     return $this;
   }
 
+  public function reset() : object
+  {
+    $this->id = 0;
+    $this->title = NULL;
+    $this->tags = NULL;
+    $this->content = NULL;
+    $this->timestamp = NULL;
+    return $this;
+  }
+
   public function fetch(int $id = 0) : array
   {
     // Columns that has to be selected are stored as a class' property
@@ -73,6 +83,10 @@ class Note
       if($r->execute())
       {
         $res = $r->fetch(PDO::FETCH_ASSOC);
+        if(!$res)
+        {
+          return [];
+        }
         $r->closeCursor();
         $res['content'] = $this->parse($res['content']);
         return $res;
