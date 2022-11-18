@@ -96,8 +96,8 @@
                                                                                                                 :(!empty($_POST['tags']) ? $_POST['tags']:'') ?>">
           <!-- Note content -->
           <label for="content">Content :</label>
-          <textarea name="content" id="content" class="monospace" placeholder="Give your note a content.." rows="15"><?=  (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slide']['content']
-                                                                                                                            :(!empty($_POST['content']) ? $_POST['content']:'')
+          <textarea name="content" id="content" class="text-monospace" placeholder="Give your note a content.." rows="15"><?=  (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slide']['content']
+                                                                                                                                 :(!empty($_POST['content']) ? $_POST['content']:'')
         ?></textarea>
           <!-- Submit button -->
           <div class="editor-buttons">

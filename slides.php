@@ -3,8 +3,10 @@ require 'config.php';
 
 $NoteObj = new Note($dbh);
 $TagObj = new Tag($dbh);
-$CheatsheetObj = new Cheatsheet($dbh);
+$SlideObj = new Slide($dbh);
 
 $templateVars = [];
 
-require 'templates/cheatsheets.tpl.php';
+$templateVars['slide'] = $SlideObj->fetch_rand();
+
+require 'templates/slides.tpl.php';

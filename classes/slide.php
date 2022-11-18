@@ -81,6 +81,22 @@ class Slide
     }
   }
 
+  public function count() : int
+  {
+    $r = $this->dbh->query('SELECT COUNT(id) as nbr FROM ' . $this->table);
+    $res = $r->fetch(PDO::FETCH_ASSOC)['nbr'];
+    $r->closeCursor();
+    return $res;
+  }
+
+  public function get_last_column_id() : int
+  {
+    $r = $this->dbh->query('SELECT id FROM ' . $this->table . ' ORDER BY id DESC');
+    $res = $r->fetch(PDO::FETCH_ASSOC);
+    $r->closeCursor();
+    return $res['id'];
+  }
+
   public function fetch() : array
   {
     // Columns that has to be selected are stored as a class' property
@@ -117,6 +133,28 @@ class Slide
       $r->closeCursor();
       return $res;
     }
+  }
+
+  public function fetch_rand() : array
+  {
+
+    $res = NULL;
+    while(empty($res))
+    {
+      $rand = rand(1, $this->get_last_column_id());
+      $r = $this->dbh->query('SELECT * FROM ' . $this->table . ' WHERE id = ' . $rand);
+      if(!$r)
+      {
+        // continue;
+      }
+      $res = $r->fetch();
+      $r->closeCursor();
+    }
+    if(!$rand == 1 && empty($res))
+    {
+      return [];
+    }
+    return $res;
   }
 
   public function delete() : int
