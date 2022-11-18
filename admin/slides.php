@@ -18,12 +18,11 @@ if($_SESSION['id'] > 1)
 }
 // A Cheatsheet object to handle CRUD operations
 $SlideObj = new Slide($dbh);
-
 // DELETE
 if(!empty($_POST['delete']))
 {
-  $templateVars['delete_success'] = $NoteObj->set('id', $_POST['delete'])
-                                            ->delete();
+  $templateVars['delete_success'] = $SlideObj->set('id', $_POST['delete'])
+                                             ->delete();
 }
 if(!empty($_POST['title']) && !empty($_POST['tags']) &&  !empty($_POST['content']))
 {

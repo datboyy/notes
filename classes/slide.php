@@ -121,7 +121,7 @@ class Slide
 
   public function delete() : int
   {
-    if(isset($_GET['id']))
+    if(!empty($this->id))
     {
       $r = $this->dbh->prepare('DELETE FROM ' . $this->table . ' WHERE id = :id');
       $r->bindValue(':id', $this->id, PDO::PARAM_INT);
