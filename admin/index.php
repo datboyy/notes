@@ -27,8 +27,11 @@ if(!empty($_POST['delete']))
 elseif(!empty($_POST['title']) &&  !empty($_POST['tags']) &&  !empty($_POST['content']))
 {
     // CREATE, UPDATE
-    $templateVars['save_note_success'] = $NoteObj->set('id', !empty($_GET['id']) ? $_GET['id']:0) // handle UPDATE case
-                                                 ->set('title', $_POST['title'])
+    if(!empty($_GET['id']))
+    {
+      $NoteObj->set('id', $_GET['id']);
+    }
+    $templateVars['save_note_success'] = $NoteObj->set('title', $_POST['title'])
                                                  ->set('tags', $_POST['tags'])
                                                  ->set('user_id', $_SESSION['id'])
                                                  ->set('resume', implode(' ', array_slice(explode(' ', $_POST['content']), 0, 50)))
