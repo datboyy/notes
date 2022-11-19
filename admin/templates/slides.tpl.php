@@ -132,7 +132,7 @@
                 foreach(explode(',', $note['tags']) as $tag)
                 {
                 ?>
-                  <span class="tag"><?= ucfirst(trim(htmlspecialchars($tag))) ?></span>
+                  <span class="tag"><?= ctype_upper($tag) ? htmlspecialchars(trim($tag)):ucfirst(trim(htmlspecialchars($tag))) ?></span>
                 <?php
                 }
                 ?>
