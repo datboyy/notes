@@ -1,11 +1,11 @@
 <?php
 $prefix = defined('ADMIN') && ADMIN ? '../':'';
 
-require  $prefix . 'classes/utils.php';
-require  $prefix . 'classes/user.php';
-require  $prefix . 'classes/note.php';
-require  $prefix . 'classes/tag.php';
-require  $prefix . 'classes/slide.php';
+require  $prefix . 'classes/utils.class.php';
+require  $prefix . 'classes/user.class.php';
+require  $prefix . 'classes/note.class.php';
+require  $prefix . 'classes/tag.class.php';
+require  $prefix . 'classes/slide.class.php';
 
 session_start();
 
