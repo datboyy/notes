@@ -12,7 +12,7 @@ class Slide
 {
 
   protected $dbh;
-  protected $table = 'slides';
+  protected $tables =  ['slides', 'slides_content'];
 
   protected $id;
   protected $title;
@@ -20,6 +20,8 @@ class Slide
   protected $content;
   protected $timestamp;
   protected $setterAllowedValues = ['id', 'title', 'tags', 'content', 'timestamp'];
+
+  protected $last_column_id;
 
   public function __construct(PDO $dbh)
   {
@@ -89,11 +91,12 @@ class Slide
     return $res;
   }
 
-  public function get_last_column_id() : int
+  private function get_last_column_id() : int
   {
     $r = $this->dbh->query('SELECT id FROM ' . $this->table . ' ORDER BY id DESC');
     $res = $r->fetch(PDO::FETCH_ASSOC);
     $r->closeCursor();
+    $this->last_column_id = $res['id'];
     return $res['id'];
   }
 
@@ -136,26 +139,22 @@ class Slide
     }
   }
 
-  public function fetch_rand() : array
+  public function rand()
   {
+    return rand(0, !empty($this->last_column_id) ? $this->last_column_id:$this->get_last_column_id());
+  }
 
-    $res = NULL;
-    while(empty($res))
+  public function fetch_rand(?int $ignore = 0) : ?array
+  {
+    $res = $this->fetch();
+    $i = rand(0, count($res) - 1);
+    while($i <= count($res))
     {
-      $rand = rand(1, $this->get_last_column_id());
-      $r = $this->dbh->query('SELECT * FROM ' . $this->table . ' WHERE id = ' . $rand);
-      if(!$r)
+      if($res[$i]['id'] != $ignore)
       {
-        // continue;
+        return $res[$i];
       }
-      $res = $r->fetch();
-      $r->closeCursor();
     }
-    if(!$rand == 1 && empty($res))
-    {
-      return [];
-    }
-    return $res;
   }
 
   public function delete() : int

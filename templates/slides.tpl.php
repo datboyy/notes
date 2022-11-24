@@ -1,10 +1,3 @@
-<?php
-if(empty($templateVars['slide']))
-{
-   echo 'Fatal error.';
-   exit();
-}
-?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -27,7 +20,19 @@ if(empty($templateVars['slide']))
           <?= $templateVars['slide']['content']; ?>
         </div> <!-- /.slide-content -->
       </div> <!-- /.slide -->
-      <a href="slides.php" class="cta">Suivant</a>
+      <div class="slide-bottom">
+        <div class="tags">
+          <?php
+          foreach(explode(',', $templateVars['slide']['tags']) as $tag)
+          {
+          ?>
+            <span class="tag"><?= ctype_upper($tag) ? htmlspecialchars(trim($tag)):ucfirst(htmlspecialchars(trim($tag))) ?></span>
+          <?php
+          }
+          ?>
+          <a href="slides.php?=last=<?= $templateVars['slide']['id'] ?>" class="cta">Suivant</a>
+        </div>
+      </div>
     </div> <!-- /.slide-container -->
   </body>
 </html>

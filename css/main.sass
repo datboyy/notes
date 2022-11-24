@@ -250,11 +250,11 @@ html, body
     width: 50%
     margin: 50px auto 20px auto
   .slide
-    height: 90%
     padding: 40px
     background-color: #000
     color: #fff
     font-family: $content_font
+    overflow: auto
     h1
       font-size: 14px
     .slide-content
@@ -268,6 +268,7 @@ html, body
       p
         text-align: justify
         line-height: 25px
+        margin-bottom: 20px
       img
         text-align: center
       ul
@@ -279,6 +280,9 @@ html, body
       a
         color: $text-accent
         text-decoration: none
+      img
+        margin-top: 50px
+        margin-bottom: 20px
       code
         max-height: 200px
         overflow: auto
@@ -291,11 +295,24 @@ html, body
     text-decoration: none
     border: 0
     color: #fff
+    margin-bottom: 50px
     padding: 20px
-    margin-top: 20px
     margin-right: 5px
     font-weight: 600
     font-family: $content_font
     font-size: 14px
     &:hover
       background-color: $text_accent
+
+.slide-bottom
+  display: flex
+  align-items: center
+  margin-top: 20px
+  font-family: $content_font
+  .tags
+    flex: 1
+  .tag
+    padding: 8px
+    font-size: 15px
+    margin-top: 10px
+    color: #aaa
