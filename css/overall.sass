@@ -18,8 +18,43 @@ $success_text_color: #0a5302
 $error_color: #ff4902
 $error_text_color: #4d1803
 
+$box-shadow: 5px 5px 15px 5px rgba(0,0,0,1)
+
+.d-none
+  display: none
+
+.container-flex
+  display: flex
+
+.container-flex-column
+  display: flex
+  flex-direction: column
+
+.w-50
+  width: 50%
+
+.w-100
+  width: 100%
+
 .text-center
   text-align: center
+
+.text-accent
+  color: $text-accent
+
+.text-monospace
+  font-family: monospace
+
+.text-secondary
+  color: $text_secondary
+
+.text-secondary-light
+  color: $text_secondary_light
+
+.smlr
+  font-size: 12.5px
+  line-height: 1.3em
+  color: #999
 
 form
   margin-bottom: 40px
@@ -71,16 +106,6 @@ form
       font-family: $content_font
       font-size: 14px
 
-.text-accent
-  color: $text-accent
-
-.text-monospace
-  font-family: monospace
-
-.smlr
-  font-size: 12.5px
-  line-height: 1.3em
-  color: #999
 
 code
   display: block
@@ -114,7 +139,6 @@ code
   &-error
     background: $error_color
     color: $error_text_color
-
 
 .tag
   align-self: flex-end
