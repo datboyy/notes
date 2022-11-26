@@ -1,3 +1,5 @@
+@import 'overall.sass'
+
 .alert
   width: 98%
   margin: 30px 0 30px 0
@@ -5,6 +7,15 @@
   font-family: $content_font
   font-weight: 700
   padding: 10px
+  &--success
+    background: $success_color
+    color: $success_text_color
+  &--error
+    background: $error_color
+    color: $error_text_color
+  &--info
+    background-color: $info_color
+    color: $info_text_color
   p
     margin-bottom: 0px
   a
@@ -17,9 +28,3 @@
   input[type="submit"], button
       width: 50%
       background-color: $error_text_color
-  &-success
-    background: $success_color
-    color: $success_text_color
-  &-error
-    background: $error_color
-    color: $error_text_color

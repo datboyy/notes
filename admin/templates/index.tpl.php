@@ -30,10 +30,10 @@
 
             <!-- Missing data error -->
             <?= isset($templateVars['missing_datas']) && !isset($_POST['delete']) ?
-                  '<div class="alert alert-error"><p>Some required field have not been completed.</p></div>':'' ?> <!--/.alert -->
+                  '<div class="alert alert--error"><p>Some required field have not been completed.</p></div>':'' ?> <!--/.alert -->
 
             <!-- Data saved success message  -->
-            <?= !empty($templateVars['save_note_success']) ? '<div class="alert alert-success"><p>Your modifications have been saved.</p></div>':'' ?>
+            <?= !empty($templateVars['save_note_success']) ? '<div class="alert alert--success"><p>Your modifications have been saved.</p></div>':'' ?>
             <?php
             if(isset($_GET['delete']) && !isset($_POST['delete']))
             {
@@ -50,7 +50,7 @@
             }
             ?>
             <!-- Deletion confirmation message -->
-            <?= !empty($templateVars['delete_success']) ? '<div class="alert alert-success">The selected note has been removed.</div>':''; ?>
+            <?= !empty($templateVars['delete_success']) ? '<div class="alert alert--success">The selected note has been removed.</div>':''; ?>
 
             <!-- Notes editor -->
             <form method="POST">

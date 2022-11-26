@@ -48,14 +48,14 @@
             if(!empty($templateVars['add_slide_success']))
             {
             ?>
-              <div class="alert alert-success">La fiche a été enregistrée avec success</div> <!-- /.alert-success -->
+              <div class="alert alert--success">La fiche a été enregistrée avec success</div> <!-- /.alert-success -->
             <?php
             }
             elseif(isset($_GET['delete']) && !isset($_POST['delete']))
             {
             ?>
               <!-- Deletion confirmation form -->
-              <div class="alert alert-error">
+              <div class="alert alert--error">
                 <form method="POST" action="slides.php">
                   <input type="hidden" name="delete" value="<?= intval($_GET['delete']) ?>" />
                   Are you sure you want to delete this note ?
@@ -68,7 +68,7 @@
             {
             ?>
               <!-- Deletion confirmation message -->
-              <div class="alert alert-success">The selected note has been removed.</div> <!-- .alert-succcess -->
+              <div class="alert alert--success">The selected note has been removed.</div> <!-- .alert-succcess -->
             <?php
             }
             ?>
@@ -112,7 +112,9 @@
           }
           else
           { ?>
-            <p>Il n'y a pas de diaporama à afficher, utilisez l'interface dédiée pour créer votre premier diaporama !</p>
+            <div class="alert alert--info">
+              <p>Il n'y a pas de diaporama à afficher, utilisez l'interface dédiée pour créer votre premier diaporama !</p>
+            </div>
     <?php } ?>
         </ul>
       </div> <!-- /.modal-body -->

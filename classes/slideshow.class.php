@@ -18,7 +18,7 @@ class Slideshow
 
   public function save() : int
   {
-  
+
   }
 
   public function fetch() : array
