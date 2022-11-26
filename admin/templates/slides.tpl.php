@@ -7,14 +7,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/solid.min.css" integrity="sha512-6mc0R607di/biCutMUtU9K7NtNewiGQzrvWX4bWTeqmljZdJrwYvKJtnhgR+Ryvj+NRJ8+NnnCM/biGqMe/iRA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <link rel="stylesheet" href="../css/main.css" />
     <link rel="stylesheet" href="../css/admin.css" />
-
+    <link rel="stylesheet" href="../css/sidebar.css" />
+    <link rel="stylesheet" href="../css/slides.css" />
     <script src="scripts/three_dots_menu.js"></script>
   </head>
   <body>
     <div class="container-flex">
+      <div class="sidebar sidebar--admin">
+        <div class="sidebar__slides">
+          <div class="sidebar__slides__slide">
+             1
+          </div> <!-- /. sidebar_slides_slide -->
+          <div class="sidebar__slides__slide sidebar__slides__slide--add">
+             <a href="#" class="slide_add_button">+</slide>
+          </div> <!-- /. sidebar_slides_slide -->
+        </div> <!-- /. sidebar__slides -->
+      </div> <!-- /.sidebar -->
       <div class="container-flex-column container-flex-column--admin w-50">
         <?php include('templates/menu.tpl.php'); ?>
         <div class="container">
@@ -22,16 +32,12 @@
             <h1>Slides</h1><i class="fa-solid fa-ellipsis"></i>
             <div class="admin-toggle-menu d-none">
               <ul>
+                <!-- " Nouveau " three dots context menu item -->
                 <li><a href="slides.php">Nouveau</a></li>
+                <!-- " Ouvrir " three dots context menu item -->
                 <li data-modal="open-slide-modal">Ouvrir</li>
-                <?php
-                if(isset($_GET['id']))
-                {
-                ?>
-                  <li><a href="?id=<?= intval($_GET['id']) ?>&amp;delete=<?= intval($_GET['id']) ?>">Supprimer</a></li>
-                <?php
-                }
-                ?>
+                <!-- " Supprimer " three dots context menu item -->
+                <?= isset($_GET['id']) ? '<li><a href=?id="' . intval($_GET['id']) . '&amp;delete="' . intval($_GET['id']) . '">Supprimer</a></li>':'' ?>
               </ul>
             </div> <!-- /.admin-toggle-menu -->
           </div> <!-- /.container__title -->
@@ -65,41 +71,28 @@
             <?php
             }
             ?>
-          <!--
-                Cheatsheet edition form
-          -->
-          <form method="POST" action="slides.php<?= isset($_GET['id']) ? '?id=' . intval($_GET['id']):''?>">
-            <?php
-            if(isset($_GET['id']))
-            {
-            ?>
-              <input type="hidden" name="id" value="<?= intval($_GET['id']) ?>" />
-            <?php
-            }
-            ?>
-            <!-- Note title -->
-            <label for="title">Note title :</label>
-            <input type="text" name="title" id="title" placeholder="Give your note a title.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slide']['title']
-                                                                                                          :(!empty($_POST['title']) ? $_POST['title']:'') ?>">
-            <!-- Note tags -->
-            <label for="title">Tags :</label>
-            <input type="text" name="tags" id="tags" placeholder="Some tags separated with commas.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slide']['tags']
-                                                                                                                  :(!empty($_POST['tags']) ? $_POST['tags']:'') ?>">
-            <!-- Note content -->
-            <label for="content">Content :</label>
-            <textarea name="content" id="content" class="text-monospace" placeholder="Give your note a content.." rows="15"><?=  (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slide']['content']
-                                                                                                                                   :(!empty($_POST['content']) ? $_POST['content']:'')
-          ?></textarea>
-            <!-- Submit button -->
-            <div class="editor-buttons"><input type="submit" value="Submit" /></div>
-          </form>
+
+           <!-- Slideshow description -->
+           <form method="POST" action="slides.php<?= isset($_GET['id']) ? '?id=' . intval($_GET['id']):''?>">
+
+              <!-- Slide title -->
+              <label for="title">Slide title :</label>
+              <input type="text" name="title" id="title" placeholder="Give your note a title.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slide']['title']
+                                                                                                            :(!empty($_POST['title']) ? $_POST['title']:'') ?>">
+              <!-- Slide tags -->
+              <label for="title">Tags :</label>
+              <input type="text" name="tags" id="tags" placeholder="Some tags separated with commas.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slide']['tags']
+                                                                                                                    :(!empty($_POST['tags']) ? $_POST['tags']:'') ?>">
+              <input type="submit" class="btn" value="Submit" />
+           </form>
+
          </div> <!-- /.container__text-container -->
         </div> <!-- /.container -->
        </div> <!-- ./container-flex-column -->
      </div> <!-- /.container-flex -->
 
 
-    <!-- Modal windows -->
+    <!-- " Open " menu modal window  -->
     <div class="modal d-none" id="open-slide-modal">
       <div class="modal-title">
         <i class="fa-solid fa-folder"></i>Ouvrir
@@ -134,7 +127,22 @@
           }
           ?>
         </ul>
-      </div>
+      </div> <!-- /.modal-body -->
     </div> <!-- /.modal -->
+
+    <!-- Créate or modify slide modal window -->
+    <div class="modal modal--slide d-none" id="modal_slide">
+      <div class="modal-title"><i class="fa-solid fa-square-full"></i>Edit slide <i class="fa-solid fa-xmark"></i></div>
+      <div class="modal-body">
+        <form>
+            <!-- Slide content -->
+            <textarea name="content" id="content" class="text-monospace" placeholder="Give your slide a content.." rows="15"><?=  (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slide']['content']
+                                                                                                                                   :(!empty($_POST['content']) ? $_POST['content']:'');
+          ?></textarea>
+            <input type="submit" value="Submit" class="btn btn--alt" />
+        </form>
+      </div> <!-- /.modal-body -->
+    </div> <!-- /.modal -->
+
   </body>
 </html>
