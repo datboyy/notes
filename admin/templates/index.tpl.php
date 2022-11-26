@@ -70,8 +70,8 @@
               <div class="alert alert-error">
                 <form method="POST" action="index.php">
                   <input type="hidden" name="delete" value="<?= intval($_GET['delete']) ?>" />
-                  Are you sure you want to delete this note ?
-                  <input type="submit" value="Yes, delete it !" />
+                  <p>Etes vous sûr de vouloir supprimer cette note ?</p>
+                  <input type="submit" value="Oui, supprimer !" />
                   <a href="index.php?id=<?= intval($_GET['id']) ?>">Retour</a>
                 </form>
               </div> <!-- /.allert-success -->

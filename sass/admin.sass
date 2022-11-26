@@ -17,11 +17,15 @@
       font-family: $content_font
       margin-right: 20px
       padding: 20px
-    li a
-      text-decoration: none
-      color: #555
-    li a.active
-      color: $text-accent
+      &:hover
+        background-color: $text-accent
+        a
+          color: #fff !important
+      a
+        text-decoration: none
+        color: #555
+      a.active
+        color: $text-accent
 
 .admin-toggle-menu
   position: absolute
