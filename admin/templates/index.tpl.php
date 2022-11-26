@@ -37,7 +37,7 @@
                 ?>
               </ul>
             </div>
-          </div> <!-- /.title-container -->
+          </div> <!-- /.container__title -->
           <div class="container__text-container">
             <p class="smlr">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam venenatis, nisl venenatis rhoncus sagittis, tellus magna accumsan felis,
               et porta diam erat non ipsum. Integer eros libero, tristique sed sodales eu, luctus id sem.
