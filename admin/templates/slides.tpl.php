@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/admin.css" />
     <link rel="stylesheet" href="../css/sidebar.css" />
     <link rel="stylesheet" href="../css/slides.css" />
+    <link rel="stylesheet" href="../css/alerts.css" />
     <script src="scripts/three_dots_menu.js"></script>
     <script src="scripts/slideshows.js"></script>
   </head>

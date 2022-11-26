@@ -10,14 +10,19 @@
   &--success
     background: $success_color
     color: $success_text_color
+    p
+      color: $success_text_color !important
   &--error
     background: $error_color
     color: $error_text_color
+    p
+      color: $error_text_color !important
   &--info
     background-color: $info_color
     color: $info_text_color
-  p
-    margin-bottom: 0px
+    p
+      color: $info_text_color !important
+
   a
     color: $error_text_color
     text-decoration: none
@@ -25,6 +30,6 @@
     margin-left: 15px
   form
     margin-bottom: 0
-  input[type="submit"], button
+  input[type="submit"], button, .btn
       width: 50%
       background-color: $error_text_color

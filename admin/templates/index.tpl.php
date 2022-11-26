@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/main.css" />
     <link rel="stylesheet" href="../css/admin.css" />
+    <link rel="stylesheet" href="../css/alerts.css" />
     <script src="scripts/three_dots_menu.js"></script>
   </head>
   <body>
@@ -39,11 +40,11 @@
             {
             ?>
               <!-- Deletion confirmation form -->
-              <div class="alert alert-error">
+              <div class="alert alert--error">
                 <form method="POST" action="index.php">
                   <input type="hidden" name="delete" value="<?= intval($_GET['delete']) ?>" />
                   <p>Etes vous sûr de vouloir supprimer cette note ?</p>
-                  <input type="submit" value="Oui, supprimer !" /> <a href="index.php?id=<?= intval($_GET['id']) ?>">Retour</a>
+                  <input type="submit" class="btn" value="Oui, supprimer !" /> <a href="index.php?id=<?= intval($_GET['id']) ?>">Retour</a>
                 </form>
               </div> <!-- /.allert-success -->
             <?php
