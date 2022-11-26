@@ -4,7 +4,7 @@ class Slideshow
 
   protected $dbh;
   protected $table = 'slideshows';
-  protected $setterAllowedValues = ['id', 'title', 'slides_id', 'timestamp'];
+  protected $setterAllowedValues = ['id', 'title', 'tags' 'slides_id', 'timestamp'];
 
   public function __construct(PDO $dbh)
   {
@@ -18,7 +18,7 @@ class Slideshow
 
   public function save() : int
   {
-
+  
   }
 
   public function fetch() : array
