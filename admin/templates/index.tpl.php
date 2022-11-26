@@ -21,7 +21,7 @@
               <ul>
                 <li><a href="index.php">Nouveau</a></li> <!-- " Nouveau " three dots context menu item -->
                 <li data-modal="open-note-modal">Ouvrir</li> <!-- " Ouvrir " three dots context menu item -->
-                <?= isset($_GET['id']) ? '<li><a href=?id="' . intval($_GET['id']) . '&amp;delete="' . intval($_GET['id']) . '">Supprimer</a></li>':'' ?> <!-- " Supprimer " three dots context menu item -->
+                <?= isset($_GET['id']) ? '<li><a href=?id=' . intval($_GET['id']) . '&amp;delete=' . intval($_GET['id']) . '>Supprimer</a></li>':'' ?> <!-- " Supprimer " three dots context menu item -->
               </ul>
             </div> <!-- /.admin-toggle-menu -->
           </div> <!-- /.container__title -->
