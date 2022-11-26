@@ -8,116 +8,117 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/admin.css" />
     <script src="scripts/three_dots_menu.js"></script>
   </head>
   <body>
-    <?php include('templates/menu.tpl.php'); ?>
-    <div class="container">
-      <div class="title-container">
-        <h1>Notes</h1>
-        <i class="fa-solid fa-ellipsis"></i>
-        <div class="admin-toggle-menu d-none">
-          <ul>
-            <li><a href="index.php">Nouveau</a></li>
-            <li data-modal="open-note-modal">Ouvrir</li>
+    <div class="container-flex">
+      <div class="container-flex-column container-flex-column--admin w-50">
+        <?php include('templates/menu.tpl.php'); ?>
+        <div class="container">
+          <div class="container__title d-flex">
+            <h1>Notes</h1>
+            <i class="fa-solid fa-ellipsis"></i>
+            <div class="admin-toggle-menu d-none">
+              <ul>
+                <li><a href="index.php">Nouveau</a></li>
+                <li data-modal="open-note-modal">Ouvrir</li>
+                <?php
+                if(isset($_GET['id']))
+                {
+                ?>
+                  <li>
+                    <a href="?id=<?= intval($_GET['id']) ?>&amp;delete=<?= intval($_GET['id']) ?>">
+                      Supprimer
+                    </a>
+                  </li>
+                <?php
+                }
+                ?>
+              </ul>
+            </div>
+          </div> <!-- /.title-container -->
+          <div class="container__text-container">
+            <p class="smlr">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam venenatis, nisl venenatis rhoncus sagittis, tellus magna accumsan felis,
+              et porta diam erat non ipsum. Integer eros libero, tristique sed sodales eu, luctus id sem.
+            </p>
             <?php
-            if(isset($_GET['id']))
+            if(isset($templateVars['missing_datas']) && !isset($_POST['delete']))
             {
             ?>
-              <li>
-                <a href="?id=<?= intval($_GET['id']) ?>&amp;delete=<?= intval($_GET['id']) ?>">
-                  Supprimer
-                </a>
-              </li>
+              <!-- Missing data error -->
+              <div class="alert alert-error">
+                <p>
+                  Some required field have not been completed.
+                </p>
+              </div> <!--/.alert -->
+            <?php
+            }
+            elseif(!empty($templateVars['save_note_success']))
+            {
+            ?>
+              <!-- Data saved success message  -->
+              <div class="alert alert-success">
+                <p>Your modifications have been saved.</p>
+              </div>
+            <?php
+            }
+            elseif(isset($_GET['delete']) && !isset($_POST['delete']))
+            {
+            ?>
+              <!-- Deletion confirmation form -->
+              <div class="alert alert-error">
+                <form method="POST" action="index.php">
+                  <input type="hidden" name="delete" value="<?= intval($_GET['delete']) ?>" />
+                  Are you sure you want to delete this note ?
+                  <input type="submit" value="Yes, delete it !" />
+                  <a href="index.php?id=<?= intval($_GET['id']) ?>">Retour</a>
+                </form>
+              </div> <!-- /.allert-success -->
+            <?php
+            }
+            elseif(!empty($templateVars['delete_success']))
+            {
+            ?>
+            <!-- Deletion confirmation message -->
+            <div class="alert alert-success">
+              The selected note has been removed.
+            </div> <!-- .alert-succcess -->
             <?php
             }
             ?>
-          </ul>
-        </div>
-      </div> <!-- /.title-container -->
-      <div class="text-container">
-        <p class="smlr">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam venenatis, nisl venenatis rhoncus sagittis, tellus magna accumsan felis,
-          et porta diam erat non ipsum. Integer eros libero, tristique sed sodales eu, luctus id sem.
-        </p>
-        <?php
-        if(isset($templateVars['missing_datas']) && !isset($_POST['delete']))
-        {
-        ?>
-          <!-- Missing data error -->
-          <div class="alert alert-error">
-            <p>
-              Some required field have not been completed.
-            </p>
-          </div> <!--/.alert -->
-        <?php
-        }
-        elseif(!empty($templateVars['save_note_success']))
-        {
-        ?>
-          <!-- Data saved success message  -->
-          <div class="alert alert-success">
-            <p>Your modifications have been saved.</p>
-          </div>
-        <?php
-        }
-        elseif(isset($_GET['delete']) && !isset($_POST['delete']))
-        {
-        ?>
-          <!-- Deletion confirmation form -->
-          <div class="alert alert-error">
-            <form method="POST" action="index.php">
-              <input type="hidden" name="delete" value="<?= intval($_GET['delete']) ?>" />
-              Are you sure you want to delete this note ?
-              <input type="submit" value="Yes, delete it !" />
-              <a href="index.php?id=<?= intval($_GET['id']) ?>">Retour</a>
-            </form>
-          </div> <!-- /.allert-success -->
-        <?php
-        }
-        elseif(!empty($templateVars['delete_success']))
-        {
-        ?>
-          <!-- Deletion confirmation message -->
-          <div class="alert alert-success">
-            The selected note has been removed.
-          </div> <!-- .alert-succcess -->
-        <?php
-        }
-        ?>
-        <!--
-
-              Notes editor
-
-        -->
-        <form method="POST">
-          <?php
-          if(isset($_GET['id']))
-          {
-          ?>
-            <input type="hidden" name="id" value="<?= (int) $_GET['id'] ?>" />
-          <?php
-          }
-          ?>
-          <!-- Note title -->
-          <label for="title">Note title :</label>
-          <input type="text" name="title" id="title" placeholder="Give your note a title.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['title']
-                                                                                                        :(!empty($_POST['title']) ? $_POST['title']:'') ?>">
-          <!-- Note tags -->
-          <label for="title">Tags :</label>
-          <input type="text" name="tags" id="tags" placeholder="Some tags separated with commas.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['tags']
-                                                                                                                :(!empty($_POST['tags']) ? $_POST['tags']:'') ?>">
-          <!-- Note content -->
-          <label for="content">Content :</label>
-          <textarea class="text-monospace" name="content" id="content" placeholder="Give your note a content.." rows="15"><?=  (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['content']
-                                                                                                                                  :(!empty($_POST['content']) ? $_POST['content']:'')
-        ?></textarea>
-          <!-- Submit button -->
-          <div class="editor-buttons">
-            <input type="submit" value="Submit" />
-          </div>
-        </form>
-      </div> <!-- /.text-container -->
-    </div> <!-- /.container -->
+            <!-- Notes editor -->
+            <form method="POST">
+              <?php
+              if(isset($_GET['id']))
+              {
+              ?>
+                <input type="hidden" name="id" value="<?= (int) $_GET['id'] ?>" />
+              <?php
+              }
+              ?>
+              <!-- Note title -->
+              <label for="title">Note title :</label>
+              <input type="text" name="title" id="title" placeholder="Give your note a title.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['title']
+                                                                                                            :(!empty($_POST['title']) ? $_POST['title']:'') ?>">
+              <!-- Note tags -->
+              <label for="title">Tags :</label>
+              <input type="text" name="tags" id="tags" placeholder="Some tags separated with commas.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['tags']
+                                                                                                                    :(!empty($_POST['tags']) ? $_POST['tags']:'') ?>">
+              <!-- Note content -->
+              <label for="content">Content :</label>
+              <textarea class="text-monospace" name="content" id="content" placeholder="Give your note a content.." rows="15"><?=  (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['content']
+                                                                                                                                      :(!empty($_POST['content']) ? $_POST['content']:'')
+            ?></textarea>
+            <!-- Submit button -->
+            <div class="editor-buttons">
+              <input type="submit" value="Submit" />
+            </div>
+          </form>
+        </div> <!-- /.text-container -->
+      </div> <!-- /.container -->
+    </div> <!-- /.container-flex-column -->
+  </div> <!-- /.container-flex -->
 
     <!--
 

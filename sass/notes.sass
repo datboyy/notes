@@ -1,0 +1,28 @@
+@import 'overall.sass'
+
+.notes-list
+  list-style-type: none
+  margin: 0
+  margin-top: 40px
+  margin-bottom: 40px
+  padding: 0
+  li
+    display: flex
+    align-items: center
+    width: 98%
+    padding: 15px
+    font-size: 20px
+    &:hover
+      background-color: $text-accent !important
+    &:hover a
+      color: #fff !important
+    &:nth-child(odd)
+      background-color: #090909
+    a:first-of-type
+      flex: 1
+      text-decoration: none
+      color: #ff0255
+    .tag
+      font-size: 15px
+    .tag a
+      color: #aaa

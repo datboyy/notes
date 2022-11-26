@@ -9,6 +9,9 @@ $text_accent_secondary: #ff022c
 $text_secondary: #999
 $text_secondary_light: #ccc
 
+$view_text_font_size: 18px
+$view_text_line_height: 30px
+
 $background_secondary: #555
 
 $primary_links_color: blue
@@ -29,6 +32,8 @@ $box-shadow: 5px 5px 15px 5px rgba(0,0,0,1)
 .container-flex-column
   display: flex
   flex-direction: column
+  &--admin
+    margin-bottom: 50px
 
 .w-50
   width: 50%
@@ -66,7 +71,7 @@ form
     font-size: 15px
     color: $text_secondary_light
   input[type="text"], input[type="password"], input[type="email"]
-    width: 91%
+    width: 95%
     margin-top: 5px
     margin-bottom: 15px
     height: 10px
@@ -75,7 +80,7 @@ form
     font-size: 18px
   textarea
     resize: none
-    width: 91%
+    width: 95%
     padding: 20px
     margin: auto
     font-family: $content_font
@@ -83,7 +88,7 @@ form
     &::placeholder
       font-size: 18px
   input[type="submit"]
-    width: 98%
+    width: 100%
     background-color: $text_accent
     border: 0
     color: #fff
@@ -95,16 +100,16 @@ form
     &:hover
       background-color: $text_accent_secondary
       cursor: pointer
-    input[type="reset"]
-      width: 98%
-      background-color: $text_accent
-      border: 0
-      color: #fff
-      padding: 20px
-      margin-top: 20px
-      font-weight: 600
-      font-family: $content_font
-      font-size: 14px
+  input[type="reset"]
+    width: 100%
+    background-color: $text_accent
+    border: 0
+    color: #fff
+    padding: 20px
+    margin-top: 20px
+    font-weight: 600
+    font-family: $content_font
+    font-size: 14px
 
 
 code
@@ -145,7 +150,7 @@ code
   margin-left: 5px
   padding: 5px
   background-color: #111
-  font-size: 12px
+  font-size: 20px
   color: #ccc
   a
     text-decoration: none
@@ -156,7 +161,7 @@ code
   top: 40px
   left: 40px
   z-index: 99
-  min-width: 80ch
+  width: 400px
   padding-bottom: 20px
   background-color: #050505
   border: 1px solid #151515
