@@ -6,6 +6,7 @@ require  $prefix . 'classes/user.class.php';
 require  $prefix . 'classes/note.class.php';
 require  $prefix . 'classes/tag.class.php';
 require  $prefix . 'classes/slide.class.php';
+require  $prefix . 'classes/slideshow.class.php';
 
 session_start();
 

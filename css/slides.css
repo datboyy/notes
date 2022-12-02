@@ -1,1 +1,137 @@
-.d-none{display:none}.container-flex{display:flex}.container-flex-column{display:flex;flex-direction:column}.container-flex-column--admin{margin-bottom:50px}.w-50{width:50%}.w-100{width:100%}.text-center{text-align:center}.text-accent{color:#ff0255}.text-monospace{font-family:monospace}.text-secondary{color:#999}.text-secondary-light{color:#ccc}.smlr{font-size:12.5px;line-height:1.3em;color:#999}code{display:block;padding:20px;background-color:#111;line-height:30px;color:#ff0255;text-align:left;overflow:auto}.tag{margin-left:5px;padding:5px;background-color:#111;font-size:20px;color:#ccc}.tag a{text-decoration:none;color:#ccc}.sidebar.sidebar--admin{margin-top:200px;margin-right:-100px}.sidebar__slides__slide{display:flex;align-items:center;justify-content:center;width:200px;height:100px;margin:auto;margin-bottom:20px;box-shadow:5px 5px 15px 5px #000;background:#fff;font-family:"Roboto";font-weight:600;opacity:.9}.sidebar__slides__slide--add{font-size:30px;background:rgba(0,0,0,0);border:2px solid #fff;color:#fff}.slide_add_button{color:#3202ff;text-decoration:none}.slide_add_button:hover{color:#fff}.modal--slide .fa-square-full{margin-right:15px}/*# sourceMappingURL=slides.css.map */
+/* General spacing */
+/* General fonts */
+/* Pink text accent */
+/* Secondary text accent */
+/* Text with less value */
+/* Helpers to show humain readable  text */
+/* Links */
+/* Alerts */
+/* General box shadow */
+.d-none {
+  display: none;
+}
+
+.container-flex {
+  display: flex;
+}
+
+.container-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.container-flex-column--admin {
+  margin-bottom: 50px;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-accent {
+  color: #ff0255;
+}
+
+.text-monospace {
+  font-family: monospace;
+}
+
+.text-secondary {
+  color: #999;
+}
+
+.text-secondary-light {
+  color: #ccc;
+}
+
+.smlr {
+  font-size: 12.5px;
+  line-height: 1.3em;
+  color: #999;
+}
+
+code {
+  display: block;
+  padding: 20px;
+  background-color: #111;
+  line-height: 30px;
+  color: #ff0255;
+  text-align: left;
+  overflow: auto;
+}
+
+.tag {
+  margin-left: 5px;
+  padding: 5px;
+  background-color: #111;
+  font-size: 20px;
+  color: #ccc;
+}
+.tag a {
+  text-decoration: none;
+  color: #ccc;
+}
+
+.sidebar.sidebar--admin {
+  margin-top: 200px;
+  margin-right: -80px;
+  width: 250px;
+}
+
+.sidebar__slides_overflow_container {
+  height: 500px;
+  overflow-y: auto;
+  direction: rtl;
+}
+.sidebar__slides__slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 100px;
+  margin: auto;
+  margin-bottom: 20px;
+  box-shadow: 5px 5px 15px 5px rgb(0, 0, 0);
+  background: #fff;
+  font-family: "Roboto";
+  font-weight: 600;
+  opacity: 0.5;
+}
+.sidebar__slides__slide.active {
+  opacity: 1;
+}
+.sidebar__slides__slide:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+.sidebar__slides__slide--add {
+  font-size: 30px;
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.slide_add_button {
+  color: #3202ff;
+  text-decoration: none;
+}
+.slide_add_button:hover {
+  color: #fff;
+}
+
+.modal--slide {
+  left: 500px;
+  top: 300;
+}
+.modal--slide .fa-square-full {
+  margin-right: 15px;
+}
+
+/*# sourceMappingURL=slides.css.map */

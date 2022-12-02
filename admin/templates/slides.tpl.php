@@ -19,13 +19,15 @@
     <div class="container-flex">
       <div class="sidebar sidebar--admin">
         <div class="sidebar__slides">
-          <div class="sidebar__slides__slide">
-             1
-          </div> <!-- /. sidebar_slides_slide -->
-          <div class="sidebar__slides__slide sidebar__slides__slide--add">
-             <a href="#" class="slide_add_button">+</slide>
-          </div> <!-- /. sidebar_slides_slide -->
-        </div> <!-- /. sidebar__slides -->
+          <div class="sidebar__slides_overflow_container">
+            <div class="sidebar__slides__slide" data-slide-id="1">
+               1
+            </div> <!-- /. sidebar_slides_slide -->
+            <div class="sidebar__slides__slide sidebar__slides__slide--add">
+               <a href="#" class="slide_add_button">+</slide>
+            </div> <!-- /. sidebar_slides_slide -->
+          </div> <!-- /. sidebar__slides -->
+        </div> <!-- /.sidebar__slides__overflow_container -->
       </div> <!-- /.sidebar -->
       <div class="container-flex-column container-flex-column--admin w-50">
         <?php include('templates/menu.tpl.php'); ?>
@@ -77,7 +79,7 @@
            <!-- Slideshow description -->
            <form method="POST" name="slideshow_form" action="slides.php<?= isset($_GET['id']) ? '?id=' . intval($_GET['id']):''?>">
               <!-- Slide title -->
-              <label for="title">Slide title :</label>
+              <label for="title">Title :</label>
               <input type="text" name="title" id="title" placeholder="Give your slideshow a title.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slide']['title']:(!empty($_POST['title']) ? $_POST['title']:'') ?>">
               <!-- Slide tags -->
               <label for="title">Tags :</label>
@@ -127,7 +129,7 @@
       <div class="modal-body">
         <form>
             <!-- Slide content -->
-            <textarea name="content" id="content" class="text-monospace" placeholder="Give your slide a content.." rows="15"><?=  (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slide']['content']:(!empty($_POST['content']) ? $_POST['content']:'');?></textarea>
+            <textarea name="content" data-slide-id="" id="content" class="text-monospace" placeholder="Give your slide a content.." rows="15"><?=  (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slide']['content']:(!empty($_POST['content']) ? $_POST['content']:'');?></textarea>
             <input type="submit" value="Submit" class="btn btn--alt" />
         </form>
       </div> <!-- /.modal-body -->

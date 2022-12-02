@@ -2,10 +2,20 @@
 
 .sidebar.sidebar--admin
    margin-top: 200px
-   margin-right: -100px
+   margin-right: -80px
+   width: 250px
 .sidebar
+  &__slides_overflow_container
+    height: 500px
+    overflow-y: auto
+    direction: rtl
   &__slides
     &__slide
+      &.active
+        opacity: 1
+      &:hover
+        opacity: 1
+        cursor: pointer
       display: flex
       align-items: center
       justify-content: center
@@ -17,7 +27,7 @@
       background: #fff
       font-family: $content_font
       font-weight: 600
-      opacity: 0.9
+      opacity: 0.5
       &--add
         font-size: 30px
         background: transparent
@@ -31,5 +41,7 @@
     color: #fff
 
 .modal--slide
-  .fa-square-full
-    margin-right: 15px
+   left: 500px
+   top: 300
+   .fa-square-full
+     margin-right: 15px
