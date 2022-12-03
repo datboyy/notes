@@ -56,7 +56,7 @@
             <!-- Notes editor -->
             <form method="POST">
               <!-- An id field appears in UPDATE context -->
-              <?= isset($_GET['id']) ? '<input type="hidden" name="id" value="' .  intval($_GET['id']) . ' />"':'' ?>
+              <?= isset($_GET['id']) ? '<input type="hidden" name="slideshow_id" value="' .  intval($_GET['id']) . ' />"':'' ?>
               <!-- Note title -->
               <label for="title">Note title :</label>
               <input type="text" name="title" id="title" placeholder="Give your note a title.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_note']['title']:(!empty($_POST['title']) ? $_POST['title']:'') ?>">

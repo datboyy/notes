@@ -78,6 +78,8 @@
 
            <!-- Slideshow description -->
            <form method="POST" name="slideshow_form" action="slides.php<?= isset($_GET['id']) ? '?id=' . intval($_GET['id']):''?>">
+              <!-- Slide id -->
+              <?= isset($_GET['id']) ? '<input type="hidden" name="id" value="' . intval($_GET['id']) . '"':'' ?>
               <!-- Slide title -->
               <label for="title">Title :</label>
               <input type="text" name="title" id="title" placeholder="Give your slideshow a title.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slide']['title']:(!empty($_POST['title']) ? $_POST['title']:'') ?>">

@@ -14,7 +14,7 @@ class Slideshow
   protected $dbh;
   protected $table = 'slideshows';
   protected $table_slides = 'slides';
-  protected $setterAllowedValues = ['id', 'title', 'tags'];
+  protected $setterAllowedValues = ['id', 'title', 'tags', 'timestamp'];
 
   protected $id;
   protected $title;
@@ -89,6 +89,7 @@ class Slideshow
     }
     else
     {
+      echo 'UPDATE';
       $r = $this->dbh->prepare('UPDATE FROM ' . $this->table . ' SET title = :title, tags = :tags WHERE id = :id');
       $r->bindValue(':title', $this->title, PDO::PARAM_STR);
       $r->bindValue(':tags', $this->tags, PDO::PARAM_STR);
@@ -97,9 +98,49 @@ class Slideshow
     }
   }
 
+  /**
+   * Fetch a slideshow & its slides from the database
+   *
+   * @return array A slideshow dataset
+  */
   public function fetch() : array
   {
-    // @TODO : Query with a join on the slides table to get the slideshow and its slides
+    // Query with a join on the slides table to get the slideshow and its slides
+    $SQL = 'SELECT slideshows.id, slideshows.title, slideshows.title, slideshows.tags, slideshows.timestamp, slides.id AS slide_id, slides.content AS slide_content, slides.timestamp AS slide_timestamp '
+                  . ' FROM '. $this->table . ' JOIN slides ON ' . $this->table . '.id = slides.slideshow_id';
+    $r = $this->dbh->query($SQL);
+    if(!$r)
+    {
+      $r->closeCursor();
+      return [];
+    }
+    $res = $r->fetchAll(PDO::FETCH_ASSOC);
+    //
+    // Datas post-sorting
+    $sorted = [];
+    foreach($res as $k => $row)
+    {
+      if(!isset($sorted[$row['id']]))
+      {
+        $sorted[$row['id']] = [
+          'id'         =>  $row['id'],
+          'title'      =>  $row['title'],
+          'tags'       =>  $row['tags'],
+          'timestamp'  =>  $row['timestamp'],
+          'slides'     =>  []
+        ];
+      }
+      if(!empty($row['slide_id']))
+      {
+        $sorted[$row['id']]['slides'][] = [
+          'id'          =>   $row['slide_id'],
+          'content'     =>   $row['slide_content'],
+          'timestamp'   =>   $row['slide_timestamp']
+        ];
+      }
+    }
+    $r->closeCursor();
+    return array_merge($sorted);                                                // array indexes reset using array_merge 
   }
 
   public function delete() : int
