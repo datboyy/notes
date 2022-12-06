@@ -10,7 +10,6 @@
 */
 class Slideshow
 {
-
   protected $dbh;
   protected $table = 'slideshows';
   protected $table_slides = 'slides';
@@ -19,7 +18,6 @@ class Slideshow
   protected $id;
   protected $title;
   protected $tags;
-
 
   /**
    * Class constructor
@@ -105,42 +103,56 @@ class Slideshow
   */
   public function fetch() : array
   {
-    // Query with a join on the slides table to get the slideshow and its slides
-    $SQL = 'SELECT slideshows.id, slideshows.title, slideshows.title, slideshows.tags, slideshows.timestamp, slides.id AS slide_id, slides.content AS slide_content, slides.timestamp AS slide_timestamp '
-                  . ' FROM '. $this->table . ' JOIN slides ON ' . $this->table . '.id = slides.slideshow_id';
-    $r = $this->dbh->query($SQL);
-    if(!$r)
+    // If we want to select only one element
+    $whereClause = '';
+    if(!empty($this->id))
     {
-      $r->closeCursor();
-      return [];
+      $whereClause = ' WHERE slideshows.id = ' . $this->id;
     }
-    $res = $r->fetchAll(PDO::FETCH_ASSOC);
+    // Query with a join on the slides table to get the slideshow and its slides
+    $SQL = 'SELECT slideshows.id, slideshows.title, slideshows.title, slideshows.tags, slideshows.timestamp,'
+                  . ' slides.id AS slide_id, slides.content AS slide_content, slides.timestamp AS slide_timestamp '
+                  . ' FROM '. $this->table
+                  . ' JOIN slides ON ' . $this->table . '.id = slides.slideshow_id' . $whereClause
+                  . ' ORDER BY slideshows.id DESC';
+
+    $r = $this->dbh->query($SQL);
+    if($r != false)
+    {
+      $res = $this->sort($r->fetchAll(PDO::FETCH_ASSOC));
+      $r->closeCursor();
+      return array_merge($res);
+    }
+    return [];
+  }
+
+  /**
+   * Sort a dataset from the database
+   *
+   * @param array  A slideshow dataset from the databse
+   * @return array $sorted A sorted dataset
+  */
+  private function sort(array $res) : array
+  {
     //
-    // Datas post-sorting
+    // Sort multiple dataset from the database
     $sorted = [];
     foreach($res as $k => $row)
     {
       if(!isset($sorted[$row['id']]))
       {
-        $sorted[$row['id']] = [
-          'id'         =>  $row['id'],
-          'title'      =>  $row['title'],
-          'tags'       =>  $row['tags'],
-          'timestamp'  =>  $row['timestamp'],
-          'slides'     =>  []
-        ];
+        $sorted[$row['id']] = ['id' =>  $row['id'], 'title' =>  $row['title'], 'tags' =>  $row['tags'], 'timestamp' =>  $row['timestamp'], 'slides' =>  []];
       }
       if(!empty($row['slide_id']))
       {
-        $sorted[$row['id']]['slides'][] = [
-          'id'          =>   $row['slide_id'],
-          'content'     =>   $row['slide_content'],
-          'timestamp'   =>   $row['slide_timestamp']
-        ];
+        $sorted[$row['id']]['slides'][] = ['id' => $row['slide_id'], 'content' =>   $row['slide_content'], 'timestamp' =>   $row['slide_timestamp']];
       }
     }
-    $r->closeCursor();
-    return array_merge($sorted);                                                // array indexes reset using array_merge 
+    if(!empty($this->id))
+    {
+      return array_merge($sorted)[0]; // reset array indexes using array_merge, only one record
+    }
+    return array_merge($sorted); // reset array indexes using array_merge
   }
 
   public function delete() : int

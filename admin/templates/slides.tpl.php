@@ -20,9 +20,30 @@
       <div class="sidebar sidebar--admin">
         <div class="sidebar__slides">
           <div class="sidebar__slides_overflow_container">
-            <div class="sidebar__slides__slide" data-slide-id="1">
-               1
-            </div> <!-- /. sidebar_slides_slide -->
+            <!-- @TODO : Load existing slides if exists from the database -->
+            <?php
+            if(!empty($templateVars['selected_slideshow']))
+            {
+              $c = 1;
+              foreach($templateVars['selected_slideshow']['slides'] as $slide)
+              { ?>
+                <div class="sidebar__slides__slide" data-slide-id="<?= intval($slide['id']) ?>">
+                  <?= $c ?>
+                </div> <!-- /. sidebar_slides_slide -->
+          <?php
+                $c++;
+              }
+            }
+            else
+            {
+            ?>
+              <!-- Empty slideshow, display an empty slide -->
+              <div class="sidebar__slides__slide" data-slide-id="1">
+                 1
+              </div> <!-- /. sidebar_slides_slide -->
+            <?php
+            }
+            ?>
             <div class="sidebar__slides__slide sidebar__slides__slide--add">
                <a href="#" class="slide_add_button">+</slide>
             </div> <!-- /. sidebar_slides_slide -->
@@ -82,10 +103,21 @@
               <?= isset($_GET['id']) ? '<input type="hidden" name="id" value="' . intval($_GET['id']) . '"':'' ?>
               <!-- Slide title -->
               <label for="title">Title :</label>
-              <input type="text" name="title" id="title" placeholder="Give your slideshow a title.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slide']['title']:(!empty($_POST['title']) ? $_POST['title']:'') ?>">
+              <input type="text" name="title" id="title" placeholder="Give your slideshow a title.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slideshow']['title']:(!empty($_POST['title']) ? $_POST['title']:'') ?>">
               <!-- Slide tags -->
               <label for="title">Tags :</label>
-              <input type="text" name="tags" id="tags" placeholder="Some tags separated with commas.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slide']['tags']:(!empty($_POST['tags']) ? $_POST['tags']:'') ?>">
+              <input type="text" name="tags" id="tags" placeholder="Some tags separated with commas.." value="<?= (isset($_GET['id']) && empty($_POST)) ? $templateVars['selected_slideshow']['tags']:(!empty($_POST['tags']) ? $_POST['tags']:'') ?>">
+              <!-- Possible slides from database -->
+              <?php
+              if(!empty($templateVars['selected_slideshow']))
+              {
+                foreach($templateVars['selected_slideshow']['slides'] as $slide)
+                {
+              ?>
+                  <!-- @TODO : HTMLPurifier to prevent XSS -->
+                  <textarea name="slide_<?= intval($slide['id']) ?>" class="d-none" data-slide-id="<?= $slide['id'] ?>"><?= $slide['content'] ?></textarea>
+          <?php }
+              } ?>
               <input type="submit" name="slideshow_submit" class="btn" value="Submit" />
            </form>
          </div> <!-- /.container__text-container -->
@@ -98,19 +130,22 @@
     <div class="modal d-none" id="open-slide-modal">
       <div class="modal-title"><i class="fa-solid fa-folder"></i>Ouvrir <i class="fa-solid fa-xmark"></i> </div> <!-- /.modal__title -->
       <div class="modal-body">
-        <p>Sélectionnez la note que vous souhaitez éditer.</p>
+        <p>Sélectionnez le diaporama que vous souhaitez éditer.</p>
         <ul>
           <?php
-          if(!empty($templatesVars['slideshows_list']))
+          if(!empty($templateVars['slideshows_list']))
           {
-            foreach($templateVars['slideshows_list'] as $note)
+          ?>
+            <li><span class="slide_title">Séléctionnez un diaporama</span></li>
+          <?php
+            foreach($templateVars['slideshows_list'] as $slideshow)
             { ?>
               <li>
-                <span class="slide_title"><a href="?id=<?= intval($note['id']) ?>"><?= htmlspecialchars($note['title']) ?></a></span>
+                <span class="slide_title"><a href="?id=<?= intval($slideshow['id']) ?>"><?= htmlspecialchars($slideshow['title']) ?></a></span>
                 <div class="tags">
-                  <?php foreach(explode(',', $note['tags']) as $tag) { ?><span class="tag"><?= ctype_upper($tag) ? htmlspecialchars(trim($tag)):ucfirst(trim(htmlspecialchars($tag))) ?></span><?php } ?>
+                  <?php foreach(explode(',', $slideshow['tags']) as $tag) { ?><span class="tag"><?= ctype_upper($tag) ? htmlspecialchars(trim($tag)):ucfirst(trim(htmlspecialchars($tag))) ?></span><?php } ?>
                 </div> <!-- tags -->
-                <span class="slide_date"><?= date('d/m/Y', $note['timestamp']) ?></span>
+                <span class="slide_date"><?= date('d/m/Y', $slideshow['timestamp']) ?></span>
               </li>
             <?php
             }
