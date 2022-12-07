@@ -96,10 +96,18 @@ document.addEventListener('DOMContentLoaded', (ev) =>
     ev.preventDefault()
   })
 
+  //
+  //
+  // @TODO : DEBUG
+  //
+  //
   slidesModalEl.querySelector('input[type="submit"]').addEventListener('click', (ev) => {
     // Slides datas have to be submitted using the slideshow form
     let modalTextarea = slidesModalEl.querySelector('textarea')
     let slideNb = modalTextarea.getAttribute('data-slide-id')
+    //
+    console.log(slideshowformEl.querySelectorAll('textarea[name="slide_' + slideNb + '"]'));
+    //
     if(!slideshowformEl.querySelectorAll('textarea[name="slide_' + slideNb + '"]').length)
     {
       //
@@ -114,8 +122,20 @@ document.addEventListener('DOMContentLoaded', (ev) =>
     else
     {
       //
+      console.log('A textarea entry already exists for this slide.')
+      //
+      //
       // Update the existing entry
-      let currentSlideTextarea = slideshowformEl.querySelectorAll('textarea[name="slide_' + slideNb + '"]')
+      let currentSlideTextarea = slideshowformEl.querySelectorAll('textarea[name="slide_' + slideNb + '"]')[0]
+      //
+      //
+      console.log('UPDATING...')
+      console.log(slideshowformEl.querySelectorAll('textarea[name="slide_' + slideNb + '"]')[0])
+      //
+      //
+      //
+      console.log(modalTextarea.value)
+      //
       currentSlideTextarea.value = modalTextarea.value
     }
     slidesModalEl.classList.add('d-none')
