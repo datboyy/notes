@@ -68,8 +68,8 @@ if(isset($_GET['id']))
 }
 
 // Slideshows list
-$templateVars['slideshows_list'] = $Slideshow->fetch();
-
+$templateVars['slideshows_list'] = $Slideshow->reset()
+                                             ->fetch();
 
 require 'templates/slides.tpl.php';
 // EOF

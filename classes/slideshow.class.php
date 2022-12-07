@@ -69,6 +69,19 @@ class Slideshow
   }
 
   /**
+   * Reset class properties
+   *
+   * @return Slideshow The object itself
+  */
+  public function reset() : Slideshow
+  {
+    $this->id = 0;
+    $this->title = NULL;
+    $this->tags = NULL;
+    return $this;
+  }
+
+  /**
    * INSERT or UPDATE a slideshow entry
    *
    * @return int success or error
